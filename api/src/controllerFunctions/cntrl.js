@@ -1,6 +1,6 @@
 const axios = require("axios");
 const { v4: uuidv4 } = require("uuid");
-
+const db = require("../db");
 const { Pokemon, Type } = require("../db");
 
 const getAllPokemons = async () => {
@@ -70,17 +70,105 @@ const getPokemonById = async (id) => {
   return pokemon;
 };
 
-async function getPokemonByName(req, res) {
-  // Code to retrieve a specific pokemon by name
+async function getPokemonByName(name) {
+  try {
+    const pokemon = await db.Pokemon.findOne({ where: { name } });
+
+    if (pokemon) {
+      return pokemon;
+    } else {
+      const response = await axios.get(
+        `https://pokeapi.co/api/v2/pokemon/${name}`
+      );
+
+      if (response.status !== 200) {
+        throw new Error(`Pokemon '${name}' not found`);
+      }
+
+      const stats = response.data.stats || [];
+      const sprites = response.data.sprites || {};
+
+      const newPokemon = await createPokemon(
+        response.data.name,
+        sprites.front_default || null,
+        stats[0]?.base_stat || null,
+        stats[1]?.base_stat || null,
+        stats[2]?.base_stat || null,
+        stats[5]?.base_stat || null,
+        response.data.height || null,
+        response.data.weight || null
+      );
+      console.log(newPokemon);
+      return newPokemon;
+    }
+  } catch (error) {
+    throw new Error(`Error retrieving Pokemon data: ${error.message}`);
+  }
 }
 
-async function createPokemon(req, res) {
-  // Code to create a new pokemon
-}
+const createPokemon = async (
+  name,
+  image,
+  life,
+  attack,
+  defense,
+  speed,
+  height,
+  weight
+) => {
+  try {
+    const pokemon = await db.Pokemon.create({
+      name,
+      image,
+      life,
+      attack,
+      defense,
+      speed,
+      height,
+      weight,
+    });
 
-async function getAllTypes(req, res) {
-  // Code to retrieve all pokemon types from the PokeAPI
-}
+    console.log(pokemon);
+    return pokemon;
+  } catch (error) {
+    throw new Error("Error creating Pokemon");
+  }
+};
+
+const getAllTypes = async () => {
+  try {
+    const response = await axios.get("https://pokeapi.co/api/v2/type");
+    const types = response.data.results.map((type) => type.name);
+
+    if (!types || types.length === 0) {
+      throw new Error("Failed to retrieve Pokemon types");
+    }
+
+    const dbTypes = await db.Type.bulkCreate(
+      types.map((name) => ({ name })),
+      { ignoreDuplicates: true }
+    );
+
+    for (const dbType of dbTypes) {
+      const typeResponse = await axios.get(dbType.apiUrl);
+      const pokemonUrls = typeResponse.data.pokemon.map(
+        (entry) => entry.pokemon.url
+      );
+      const pokemonIds = pokemonUrls.map((url) => url.split("/")[6]);
+
+      const dbPokemon = await db.Pokemon.findAll({
+        where: { pokeId: pokemonIds },
+      });
+
+      await dbType.setPokemon(dbPokemon);
+    }
+
+    return dbTypes;
+  } catch (error) {
+    console.error(error);
+    throw new Error(`Failed to retrieve Pokemon types: ${error.message}`);
+  }
+};
 
 module.exports = {
   getAllPokemons,

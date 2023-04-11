@@ -6,6 +6,8 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
     },
     name: {
       type: DataTypes.STRING,
@@ -16,7 +18,7 @@ module.exports = (sequelize) => {
     Type.belongsToMany(models.Pokemon, {
       through: "PokemonType",
       foreignKey: "typeId",
-      otherKey: "pokemonId",
+      otherKey: "pokeId",
     });
   };
   return Type;

@@ -2,6 +2,8 @@ const express = require("express");
 const {
   getAllPokemons,
   getPokemonById,
+  getPokemonByName,
+  createPokemon,
 } = require("../controllerFunctions/cntrl");
 
 const { Pokemon, Type } = require("../db");
@@ -35,7 +37,6 @@ pokemons.get("/:id", async (req, res) => {
     });
     return;
   }
-
   try {
     const pokemon = await getPokemonById(id);
     res.json(pokemon);
@@ -47,13 +48,25 @@ pokemons.get("/:id", async (req, res) => {
   }
 });
 
-pokemons.get("/", async (req, res) => {
-  try {
-  } catch (err) {}
-});
 pokemons.post("/", async (req, res) => {
   try {
-  } catch (err) {}
+    const { name, image, life, attack, defense, speed, height, weight } =
+      req.body;
+    const pokemon = await createPokemon(
+      name,
+      image,
+      life,
+      attack,
+      defense,
+      speed,
+      height,
+      weight
+    );
+    res.status(201).json(pokemon);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error creating Pokemon");
+  }
 });
 
 module.exports = pokemons;
