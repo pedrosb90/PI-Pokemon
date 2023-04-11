@@ -5,7 +5,12 @@ const { v4: uuidv4 } = require("uuid");
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   const Pokemon = sequelize.define("pokemon", {
-    id: {
+    pokeId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: true,
+    },
+    uuid: {
       type: DataTypes.UUID,
       defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
