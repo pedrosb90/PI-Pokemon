@@ -147,24 +147,31 @@ const getAllTypes = async () => {
       throw new Error("Failed to retrieve Pokemon types");
     }
 
-    const dbTypes = await db.Type.bulkCreate(
-      types.map((name) => ({ name })),
-      { ignoreDuplicates: true }
+    const dbTypes = await Promise.all(
+      types.map(async (name) => {
+        const [dbType, created] = await db.Type.findOrCreate({
+          where: { name },
+        });
+
+        if (created) {
+          const typeResponse = await axios.get(
+            `https://pokeapi.co/api/v2/type/${name}`
+          );
+          const pokemonUrls = typeResponse.data.pokemon.map(
+            (entry) => entry.pokemon.url
+          );
+          const pokemonIds = pokemonUrls.map((url) => url.split("/")[6]);
+
+          const dbPokemon = await db.Pokemon.findAll({
+            where: { pokeId: pokemonIds },
+          });
+
+          await dbType.setPokemon(dbPokemon);
+        }
+
+        return dbType;
+      })
     );
-
-    for (const dbType of dbTypes) {
-      const typeResponse = await axios.get(dbType.apiUrl);
-      const pokemonUrls = typeResponse.data.pokemon.map(
-        (entry) => entry.pokemon.url
-      );
-      const pokemonIds = pokemonUrls.map((url) => url.split("/")[6]);
-
-      const dbPokemon = await db.Pokemon.findAll({
-        where: { pokeId: pokemonIds },
-      });
-
-      await dbType.setPokemon(dbPokemon);
-    }
 
     return dbTypes;
   } catch (error) {
