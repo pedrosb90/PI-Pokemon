@@ -71,8 +71,12 @@ const getPokemonById = async (id) => {
 };
 
 async function getPokemonByName(name) {
+  const toLcName = name.toLowerCase();
+  if (/\d/.test(toLcName)) {
+    throw new Error(`Invalid name '${name}'. Name must not contain numbers`);
+  }
   try {
-    const pokemon = await db.Pokemon.findOne({ where: { name } });
+    const pokemon = await db.Pokemon.findOne({ where: { name: toLcName } });
 
     if (pokemon) {
       return pokemon;
@@ -98,11 +102,10 @@ async function getPokemonByName(name) {
         response.data.height || null,
         response.data.weight || null
       );
-      console.log(newPokemon);
       return newPokemon;
     }
   } catch (error) {
-    throw new Error(`Error retrieving Pokemon data: ${error.message}`);
+    throw new Error(`No Pokemon found with the name ${name}`);
   }
 }
 

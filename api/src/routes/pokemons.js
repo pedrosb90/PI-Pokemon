@@ -2,7 +2,6 @@ const express = require("express");
 const {
   getAllPokemons,
   getPokemonById,
-  getPokemonByName,
   createPokemon,
 } = require("../controllerFunctions/cntrl");
 
