@@ -8,11 +8,11 @@ module.exports = (sequelize) => {
       pokeId: {
         type: DataTypes.INTEGER,
         unique: true,
+        primaryKey: true,
       },
       uuid: {
         type: DataTypes.UUID,
         defaultValue: Sequelize.UUIDV4,
-        primaryKey: true,
       },
       name: {
         type: DataTypes.STRING,
@@ -64,7 +64,6 @@ module.exports = (sequelize) => {
       },
     }
   );
-
   Pokemon.associate = (models) => {
     Pokemon.belongsToMany(models.Type, {
       through: "PokemonType",

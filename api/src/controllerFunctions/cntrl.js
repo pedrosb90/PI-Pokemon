@@ -9,29 +9,39 @@ const getAllPokemons = async () => {
   while (pokemons.length < 100 && nextUrl) {
     const response = await axios.get(nextUrl);
     const pokemonDetailsPromises = response.data.results.map((result) =>
-      axios.get(result.url).then((res) => ({
-        name: result.name,
-        ...res.data,
-      }))
+      axios.get(result.url).then(async (res) => {
+        const typesPromises = res.data.types.map((type) =>
+          Type.findOrCreate({
+            where: { name: type.type.name },
+            defaults: { color: "none" },
+          })
+        );
+        const types = await Promise.all(typesPromises);
+        const pokemon = {
+          name: result.name,
+          ...res.data,
+          types: types.map((type) => type[0]),
+        };
+        const newPokemon = await Pokemon.create({
+          uuid: uuidv4(),
+          pokeId: pokemon.id,
+          name: pokemon.name,
+          image: pokemon.sprites.front_default,
+          life: pokemon.stats[0].base_stat,
+          attack: pokemon.stats[1].base_stat,
+          defense: pokemon.stats[2].base_stat,
+          speed: pokemon.stats[5].base_stat,
+          height: pokemon.height,
+          weight: pokemon.weight,
+        });
+        await newPokemon.addTypes(types.map((type) => type[0]));
+        return newPokemon;
+      })
     );
     const pokemonDetails = await Promise.all(pokemonDetailsPromises);
-    const newPokemons = pokemonDetails.map((pokemon) => ({
-      uuid: uuidv4(),
-      pokeId: pokemon.id,
-      name: pokemon.name,
-      image: pokemon.sprites.front_default,
-      life: pokemon.stats[0].base_stat,
-      attack: pokemon.stats[1].base_stat,
-      defense: pokemon.stats[2].base_stat,
-      speed: pokemon.stats[5].base_stat,
-      height: pokemon.height,
-      weight: pokemon.weight,
-    }));
-    console.log(newPokemons);
-    pokemons.push(...newPokemons);
+    pokemons.push(...pokemonDetails);
     nextUrl = response.data.next;
   }
-  await Pokemon.bulkCreate(pokemons);
   console.log("All pokemons added to database");
   return pokemons;
 };
@@ -76,8 +86,10 @@ async function getPokemonByName(name) {
     throw new Error(`Invalid name '${name}'. Name must not contain numbers`);
   }
   try {
-    const pokemon = await db.Pokemon.findOne({ where: { name: toLcName } });
-
+    const pokemon = await db.Pokemon.findOne({
+      where: { name: toLcName },
+      include: { model: db.Type },
+    });
     if (pokemon) {
       return pokemon;
     } else {
@@ -147,33 +159,12 @@ const getAllTypes = async () => {
       throw new Error("Failed to retrieve Pokemon types");
     }
 
-    const dbTypes = await Promise.all(
-      types.map(async (name) => {
-        const [dbType, created] = await db.Type.findOrCreate({
-          where: { name },
-        });
-
-        if (created) {
-          const typeResponse = await axios.get(
-            `https://pokeapi.co/api/v2/type/${name}`
-          );
-          const pokemonUrls = typeResponse.data.pokemon.map(
-            (entry) => entry.pokemon.url
-          );
-          const pokemonIds = pokemonUrls.map((url) => url.split("/")[6]);
-
-          const dbPokemon = await db.Pokemon.findAll({
-            where: { pokeId: pokemonIds },
-          });
-
-          await dbType.setPokemon(dbPokemon);
-        }
-
-        return dbType;
-      })
+    const createdTypes = await Type.bulkCreate(
+      types.map((type) => ({ name: type }))
     );
+    console.log("Types added to database");
 
-    return dbTypes;
+    return createdTypes.map((type) => type.name);
   } catch (error) {
     console.error(error);
     throw new Error(`Failed to retrieve Pokemon types: ${error.message}`);
