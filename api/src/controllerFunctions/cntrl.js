@@ -129,7 +129,8 @@ const createPokemon = async (
   defense,
   speed,
   height,
-  weight
+  weight,
+  typeIds
 ) => {
   try {
     const pokemon = await db.Pokemon.create({
@@ -142,9 +143,27 @@ const createPokemon = async (
       height,
       weight,
     });
+    const types = await db.Type.findAll({
+      where: {
+        typeId: typeIds,
+      },
+    });
+    await pokemon.setTypes(types);
 
-    console.log(pokemon);
-    return pokemon;
+    const createdPokemon = await db.Pokemon.findOne({
+      where: {
+        pokeId: pokemon.pokeId,
+      },
+      include: [
+        {
+          model: db.Type,
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+    });
+    return createdPokemon;
   } catch (error) {
     throw new Error("Error creating Pokemon");
   }
