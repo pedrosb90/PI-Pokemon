@@ -2,6 +2,9 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getAllPokemons, getPokemonById } from "../actions/index";
+import styles1 from "../styles/pokeCards.module.css";
+import styles2 from "../styles/infoText.module.css";
+import styles3 from "../styles/cardDisplay.module.css";
 
 const DisplayPokemons = () => {
   const dispatch = useDispatch();
@@ -15,7 +18,7 @@ const DisplayPokemons = () => {
     <div>
       <h1>Display Pokemons</h1>
       {pokemons.map(({ pokeId, name, image, types }) => (
-        <div key={pokeId}>
+        <div className={`${styles1.card} ${styles2.content}`} key={pokeId}>
           <h1>{name.charAt(0).toUpperCase() + name.slice(1)}</h1>
           <img src={image} alt={name} />
           <div>
