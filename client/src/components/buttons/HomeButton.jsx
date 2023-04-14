@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/accesories/homeButton.module.css";
+import styles from "../../styles/accesories/buttons.module.css";
 
 function HomeButton(props) {
   return (
