@@ -23,8 +23,6 @@ const rootReducer = (state = initialState, action) => {
         pokeDetail: action.payload,
       };
     case GET_TYPES:
-      const payload = Array.isArray(action.payload) ? action.payload : [];
-
       return {
         ...state,
         types: action.payload,
