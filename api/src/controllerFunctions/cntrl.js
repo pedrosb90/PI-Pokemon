@@ -13,7 +13,6 @@ const getAllPokemons = async () => {
         const typesPromises = res.data.types.map((type) =>
           Type.findOrCreate({
             where: { name: type.type.name },
-            defaults: { color: "none" },
           })
         );
         const types = await Promise.all(typesPromises);
@@ -173,11 +172,10 @@ const getAllTypes = async () => {
   try {
     const response = await axios.get("https://pokeapi.co/api/v2/type");
     const types = response.data.results.map((type) => type.name);
-
+    console.log(types);
     if (!types || types.length === 0) {
       throw new Error("Failed to retrieve Pokemon types");
     }
-
     const createdTypes = await Type.bulkCreate(
       types.map((type) => ({ name: type }))
     );
@@ -189,11 +187,27 @@ const getAllTypes = async () => {
     throw new Error(`Failed to retrieve Pokemon types: ${error.message}`);
   }
 };
+const getDBTypes = async () => {
+  try {
+    const types = await Type.findAll({
+      attributes: ["name"],
+    });
 
+    if (!types || types.length === 0) {
+      throw new Error("Failed to retrieve Pokemon types");
+    }
+
+    return types.map((type) => type.name);
+  } catch (error) {
+    console.error(error);
+    throw new Error(`Failed to retrieve Pokemon types: ${error.message}`);
+  }
+};
 module.exports = {
   getAllPokemons,
   getPokemonById,
   getPokemonByName,
   createPokemon,
   getAllTypes,
+  getDBTypes,
 };

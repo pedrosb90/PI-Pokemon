@@ -19,7 +19,9 @@ pokemons.get("/", async (req, res) => {
   //   res.status(500).json({ message: "Internal Server Error" });
   // }
   try {
-    const pokemons = await Pokemon.findAll();
+    const pokemons = await Pokemon.findAll({
+      include: [{ model: Type, as: "types" }],
+    });
     res.json(pokemons);
   } catch (error) {
     console.error(error);
