@@ -7,3 +7,31 @@
   max-height: 750px;
   overflow: scroll;
 }
+
+.typeContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 20px;
+  padding: 10px;
+  align-items: flex-end;
+  max-height: 750px;
+  overflow: scroll;
+}
+.typeCard {
+  border-radius: 200px;
+  border-bottom: 5px;
+  border-top: 30px;
+  margin-bottom: 45px;
+  padding: 50px 50px;
+  text-align: center;
+  background-size: 200%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  opacity: 100%;
+  border: 6px solid white;
+  width: 220px;
+  height: 120px;
+}

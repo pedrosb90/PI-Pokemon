@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTypes } from "../actions";
 import styles from "../styles/bodyText.module.css";
+import styles1 from "../styles/cardDisplay.module.css";
+import styles3 from "../styles/infoText.module.css";
 
 const Types = () => {
   const dispatch = useDispatch();
@@ -16,9 +18,11 @@ const Types = () => {
   return (
     <div>
       <h1 className={`${styles.title}`}>Types</h1>
-      <ul>
+      <ul className={`${styles1.typeContainer} `}>
         {typeInfo.map((type, index) => (
-          <li key={index}>{type.name}</li>
+          <li className={`${styles1.typeCard} ${styles3.typeText}`} key={index}>
+            {type.name.charAt(0).toUpperCase() + type.name.slice(1)}
+          </li>
         ))}
       </ul>
     </div>
