@@ -14,15 +14,18 @@ function App() {
       className="App"
       style={{
         backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "contain",
+        backgroundSize: "cover",
         backgroundPosition: "center",
-        height: "500%",
+        height: "600%",
         width: "100%",
       }}
     >
-      <Link to="/home">
-        <HomeButton>Home</HomeButton>
-      </Link>
+      <div>
+        <Link to="/home">
+          <HomeButton>Home</HomeButton>
+        </Link>
+      </div>
+
       <Route exact path="/welcome" component={Landing} />
       <Route exact path="/home" component={Home} />
       <Route exact path="/types" component={Types} />

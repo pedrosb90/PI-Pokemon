@@ -6,6 +6,7 @@ import styles1 from "../styles/pokeCards.module.css";
 import styles2 from "../styles/infoText.module.css";
 import styles3 from "../styles/cardDisplay.module.css";
 import styles4 from "../styles/accesories/buttons.module.css";
+import styles5 from "../styles/bodyText.module.css";
 import DetailLink from "./buttons/DetailLink";
 
 const DisplayPokemons = () => {
@@ -18,8 +19,6 @@ const DisplayPokemons = () => {
 
   return (
     <div className={`${styles3.container}`}>
-      <h1>Display Pokemons</h1>
-
       {pokemons.map(({ pokeId, name, image, types }) => (
         <div className={`${styles1.card} ${styles2.content}`} key={pokeId}>
           <h1>{name.charAt(0).toUpperCase() + name.slice(1)}</h1>

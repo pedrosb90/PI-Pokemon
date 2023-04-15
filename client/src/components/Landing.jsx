@@ -1,16 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import HomeButton from "./buttons/HomeButton";
+import styles from "../styles/bodyText.module.css";
+import image from "/Users/pedro/Desktop/Henry/P INDIVIDUALES/PI-Pokemon-main/client/src/pokeLogo.png";
+import styles1 from "../styles/landing.module.css";
 
 const Landing = () => {
   return (
-    <div>
-      <Link to="/home">
-        <HomeButton>Home</HomeButton>
-      </Link>
+    <div lassName={`${styles.container}`}>
+      <br />
+      <h1 className={`${styles.title}`}>Welcome to Henry Pokemons App!</h1>
       <div>
-        {" "}
-        <h1>Welcome to Henry Pokemons App!</h1>
+        <img src={image} className={`${styles1.img}`} />
       </div>
     </div>
   );
