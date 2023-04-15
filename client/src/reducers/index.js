@@ -1,8 +1,13 @@
-import { GET_ALL_POKEMONS, GET_POKEMON_BY_ID } from "../actions/index.js";
+import {
+  GET_ALL_POKEMONS,
+  GET_POKEMON_BY_ID,
+  GET_TYPES,
+} from "../actions/index.js";
 
 const initialState = {
   pokemons: [],
   pokeDetail: {},
+  types: [],
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -16,6 +21,13 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         pokeDetail: action.payload,
+      };
+    case GET_TYPES:
+      const payload = Array.isArray(action.payload) ? action.payload : [];
+
+      return {
+        ...state,
+        types: action.payload,
       };
     default:
       return state;

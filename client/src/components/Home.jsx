@@ -9,7 +9,7 @@ const Home = () => {
     <div>
       <h1 className={`${styles.title}`}>Home</h1>
       <Link to="/types">
-        <TypesButton>Types Button</TypesButton>
+        <TypesButton />
       </Link>
       <DisplayPokemons />
     </div>
