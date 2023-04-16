@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createPokemon } from "../actions";
 import FormTypeSelect from "./specials/FormTypeSelect";
-import styles from "../styles/bodyText.module.css";
+import styles from "../styles/form.module.css";
 
 function CreatePokemons() {
   const [pokemon, setPokemon] = useState({
@@ -58,7 +58,10 @@ function CreatePokemons() {
 
   return (
     <div>
-      <form className={`${styles.formDisplay}`} onSubmit={handleSubmit}>
+      <form
+        className={`${styles.formDisplay} ${styles.container}`}
+        onSubmit={handleSubmit}
+      >
         <label className={`${styles.labelTitle}`}>Name:</label>
         <input
           type="text"
@@ -133,7 +136,8 @@ function CreatePokemons() {
 
         <label className={`${styles.labelTitle}`}>Types:</label>
         <FormTypeSelect setPokemon={setPokemon} />
-        <button type="submit" className="submit-btn">
+        <br />
+        <button type="submit" className={`${styles.submitButton}`}>
           Create Pokemon
         </button>
       </form>
