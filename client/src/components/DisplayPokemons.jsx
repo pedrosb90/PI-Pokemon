@@ -49,6 +49,7 @@ const DisplayPokemons = () => {
           </div>
         ))}
       <br />
+
       <Pagination page={page} setPage={setPage} max={max} />
     </div>
   );

@@ -13,6 +13,9 @@
   text-align: center;
   height: 100vh;
 }
+ul {
+  list-style: none;
+}
 
 .labelTitle {
   margin-top: auto;

@@ -1,8 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getPokemonById } from "../actions/index";
-import styles from "../styles/bodyText.module.css";
-import styles2 from "../styles/infoText.module.css";
+import styles from "../styles/pokeDetail.module.css";
 
 const PokemonDetail = ({ pokeId }) => {
   const pokeDetail = useSelector((state) => state.pokeDetail);
@@ -22,19 +21,25 @@ const PokemonDetail = ({ pokeId }) => {
 
     return (
       <div>
-        <h1 className={`${styles.title}`}>Pokemon Detail</h1>
-        <div className={`${styles2.content}`}>
-          {" "}
-          <h2>{capiTitle}</h2>
-          <p>ID: {pokeDetail.pokeId}</p>
+        <div className={`${styles.content} ${styles.container}`}>
+          <h1 className={`${styles.titleMain}`}>Pokemon Detail</h1>{" "}
+          <h2 className={` ${styles.title}`}>{capiTitle}</h2>
           <img src={pokeDetail.image} alt={pokeDetail.name} />
+          <p>ID: {pokeDetail.pokeId}</p>
           <p>Life: {pokeDetail.life}</p>
           <p>Attack: {pokeDetail.attack}</p>
           <p>Defense: {pokeDetail.defense}</p>
           <p>Speed: {pokeDetail.speed}</p>
           <p>Height: {pokeDetail.height}</p>
           <p>Weight: {pokeDetail.weight}</p>
-          <p>Types: {pokeDetail.types.map((type) => type.name).join(", ")}</p>
+          <p>
+            Types:{" "}
+            {pokeDetail.types
+              .map(
+                (type) => type.name.charAt(0).toUpperCase() + type.name.slice(1)
+              )
+              .join(", ")}
+          </p>
         </div>
       </div>
     );

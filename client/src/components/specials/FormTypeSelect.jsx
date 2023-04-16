@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setTypes, getTypes } from "../../actions/index";
+import styles from "../../styles/form.module.css";
 
 const FormTypeSelect = ({ setPokemon }) => {
   const types = useSelector((state) => state.types);
@@ -40,23 +41,31 @@ const FormTypeSelect = ({ setPokemon }) => {
       <input
         type="text"
         placeholder="Select types"
-        value={selectedTypes.map((t) => t.name).join(", ")}
+        value={selectedTypes
+          .map((t) => t.name.charAt(0).toUpperCase() + t.name.slice(1))
+          .join(", ")}
         onClick={toggleDropdown}
       />
       {isOpen && (
-        <ul>
+        <ul className={`${styles.typeList}`}>
           {types.map((type) => (
             <li key={type.typeId} onClick={() => handleTypeClick(type)}>
-              {type.name}
+              {type.name.charAt(0).toUpperCase() + type.name.slice(1)}
             </li>
           ))}
         </ul>
       )}
-      <div>
+      <div className={`${styles.chosenTypes}`}>
         {selectedTypes.map((type) => (
           <span key={type.typeId}>
-            {type.name}
-            <button onClick={() => handleRemoveType(type)}>x</button>
+            {type.name.charAt(0).toUpperCase() + type.name.slice(1)}
+
+            <button
+              className={`${styles.clearTypeButton}`}
+              onClick={() => handleRemoveType(type)}
+            >
+              {""}x{""}
+            </button>
           </span>
         ))}
       </div>

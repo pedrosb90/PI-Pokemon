@@ -13,7 +13,7 @@ const Pagination = ({ page, setPage, max }) => {
         Prev
       </button>
       <input
-        className={styles.input}
+        className={styles.onPage}
         type="number"
         min="1"
         max={max}
