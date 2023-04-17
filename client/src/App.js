@@ -16,8 +16,10 @@ function App() {
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        height: "600%",
+        height: "120%",
         width: "100%",
+        zoom: 0.65,
+        margin: 0,
       }}
     >
       <div>

@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createPokemon } from "../actions";
+import {
+  validateNumInput,
+  validateImageUrl,
+  validateTextInput,
+} from "../components/specials/formValidations";
 import FormTypeSelect from "./specials/FormTypeSelect";
 import styles from "../styles/form.module.css";
 function CreatePokemons() {
@@ -27,7 +32,7 @@ function CreatePokemons() {
   });
   const dispatch = useDispatch();
 
-  function handleChange(event) {
+  const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
 
@@ -49,50 +54,7 @@ function CreatePokemons() {
       ...errors,
       [name]: errorMessage,
     });
-  }
-
-  function validateNumInput(value, name) {
-    if (!value) {
-      return `Please, set ${name} value for your Pokemon`;
-    }
-    if (isNaN(value)) {
-      return `Please enter a reasonable numerical ${name} value`;
-    }
-    if (value <= 0) {
-      return `${name} has to be a positive number`;
-    }
-    if (value > 999) {
-      return `${name} cannot be greater than a 3 digit number`;
-    }
-    return "";
-  }
-
-  function validateTextInput(value, name) {
-    if (!value) {
-      return `Please, set a proper ${name} for your Pokemon`;
-    }
-    if (/[^a-zA-Z]/.test(value)) {
-      return `${name} must be composed of letters only!`;
-    }
-    if (value.length > 20) {
-      return `${name} cannot be longer than 20 characters`;
-    }
-
-    if (!isNaN(value)) {
-      return `${name} must be composed of letters only!`;
-    }
-    return "";
-  }
-
-  function validateImageUrl(value, name) {
-    if (!value) {
-      return `Please provide an ${name} URL`;
-    }
-    if (!/^https?:\/\/\S+\.(?:png|jpg|jpeg|gif)$/i.test(value)) {
-      return "Please provide a valid image URL ending in .png, .jpg, .jpeg, or .gif";
-    }
-    return "";
-  }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -153,6 +115,10 @@ function CreatePokemons() {
 
   return (
     <div>
+      <div className={`${styles.containerTitle}`}>
+        <h1 className={`${styles.title}`}>Create your own Pokemon!</h1>
+      </div>
+
       <form
         id="form"
         className={`${styles.formDisplay} ${styles.container}`}

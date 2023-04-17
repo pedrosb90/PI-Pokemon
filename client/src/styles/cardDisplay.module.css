@@ -2,9 +2,9 @@
   display: grid;
   grid-template-columns: repeat(6, 2fr);
   grid-gap: 18px;
-  padding: 10px;
+  padding: 2px;
   align-items: flex-end;
-  max-height: 720px;
+  max-height: 900px;
   overflow: scroll;
 }
 
