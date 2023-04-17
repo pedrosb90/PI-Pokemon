@@ -27,38 +27,69 @@ function CreatePokemons() {
       [name]: value,
     });
   }
+  function validateInput(value) {
+    if (!value) {
+      return "Please fill in this field";
+    }
+    if (isNaN(value)) {
+      return "Please enter a number";
+    }
+    if (value <= 0) {
+      return "Please enter a positive number";
+    }
+    if (value > 999) {
+      return "Please enter a 3 digit number";
+    }
+    return "";
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const newPokemon = {
-      ...pokemon,
-      life: parseInt(pokemon.life),
-      attack: parseInt(pokemon.attack),
-      defense: parseInt(pokemon.defense),
-      speed: parseInt(pokemon.speed),
-      height: parseInt(pokemon.height),
-      weight: parseInt(pokemon.weight),
-      typeIds: pokemon.typeIds.map((type) => type.typeId.toString()),
-    };
-    console.log(pokemon.typeIds);
-    dispatch(createPokemon(newPokemon));
-    setPokemon({
-      name: "",
-      image: "",
-      life: 0,
-      attack: 0,
-      defense: 0,
-      speed: 0,
-      height: 0,
-      weight: 0,
-      typeIds: [],
+    const form = document.getElementById("form");
+    const inputs = form.querySelectorAll("input");
+    let formIsValid = true;
+    inputs.forEach((input) => {
+      const validationMessage = validateInput(input.value);
+      if (validationMessage) {
+        input.setCustomValidity(validationMessage);
+        formIsValid = false;
+      } else {
+        input.setCustomValidity("");
+      }
     });
+
+    if (formIsValid) {
+      const newPokemon = {
+        ...pokemon,
+        life: parseInt(pokemon.life),
+        attack: parseInt(pokemon.attack),
+        defense: parseInt(pokemon.defense),
+        speed: parseInt(pokemon.speed),
+        height: parseInt(pokemon.height),
+        weight: parseInt(pokemon.weight),
+        typeIds: pokemon.typeIds.map((type) => type.typeId.toString()),
+      };
+      console.log(pokemon.typeIds);
+      dispatch(createPokemon(newPokemon));
+      setPokemon({
+        name: "",
+        image: "",
+        life: 0,
+        attack: 0,
+        defense: 0,
+        speed: 0,
+        height: 0,
+        weight: 0,
+        typeIds: [],
+      });
+    }
   };
 
   return (
     <div>
       <form
+        id="form"
         className={`${styles.formDisplay} ${styles.container}`}
         onSubmit={handleSubmit}
       >
@@ -87,7 +118,15 @@ function CreatePokemons() {
           name="life"
           value={pokemon.life}
           onChange={handleChange}
+          className={
+            validateInput(pokemon.life) ? styles.invalid : styles.valid
+          }
         />
+        {validateInput(pokemon.life) && (
+          <label className={styles.errorMessage}>
+            {validateInput(pokemon.life)}
+          </label>
+        )}
 
         <label className={`${styles.labelTitle}`}>Attack:</label>
         <input

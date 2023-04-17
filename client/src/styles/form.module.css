@@ -156,3 +156,10 @@ input[type="number"] {
   font-size: 9px;
   height: 13px;
 }
+.invalid {
+  border: 2px solid red;
+}
+
+.valid {
+  border: 2px solid green;
+}
