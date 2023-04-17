@@ -100,6 +100,14 @@ input[type="text"] {
   margin: 0 auto;
 }
 
+input[type="text"].invalid {
+  border: 2px solid red;
+}
+
+input[type="text"].valid {
+  border: 2px solid green;
+}
+
 input[type="number"] {
   width: 120pt;
   padding: 10px;
@@ -108,6 +116,14 @@ input[type="number"] {
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
   display: block;
   margin: 0 auto;
+}
+
+input[type="number"].invalid {
+  border: 2px solid red;
+}
+
+input[type="number"].valid {
+  border: 2px solid green;
 }
 
 .submitButton {
@@ -125,41 +141,7 @@ input[type="number"] {
 .submit-btn:hover {
   background-color: #3e8e41;
 }
-.input-control {
-  display: flex;
-  flex-direction: column;
-}
-
-.input-control input {
-  border: 2px solid #f0f0f0;
-  border-radius: 4px;
-  display: block;
-  font-size: 12px;
-  padding: 10px;
-  width: 100%;
-}
-
-.input-control input:focus {
-  outline: 0;
-}
-
-.input-control.success input {
-  border-color: #09c372;
-}
-
-.input-control.error input {
-  border-color: #ff3860;
-}
-
-.input-control .error {
-  color: #ff3860;
-  font-size: 9px;
-  height: 13px;
-}
-.invalid {
-  border: 2px solid red;
-}
-
-.valid {
-  border: 2px solid green;
+.errorMessage {
+  font-size: 10pt;
+  color: red;
 }

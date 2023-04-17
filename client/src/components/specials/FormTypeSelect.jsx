@@ -9,6 +9,7 @@ const FormTypeSelect = ({ setPokemon }) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTypes, setSelectedTypes] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     dispatch(getTypes());
@@ -25,6 +26,7 @@ const FormTypeSelect = ({ setPokemon }) => {
         ...prevState,
         typeIds: [...prevState.typeIds, typeId],
       }));
+      setError("");
     }
   };
 
@@ -34,6 +36,19 @@ const FormTypeSelect = ({ setPokemon }) => {
       ...prevState,
       typeIds: prevState.typeIds.filter((id) => id !== typeId),
     }));
+  };
+  const validateTypes = () => {
+    if (selectedTypes.length === 0) {
+      setError("Please select at least one type");
+      return false;
+    }
+    return true;
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const isValid = validateTypes();
+    if (isValid) {
+    }
   };
 
   return (

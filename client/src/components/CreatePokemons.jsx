@@ -3,8 +3,17 @@ import { useDispatch } from "react-redux";
 import { createPokemon } from "../actions";
 import FormTypeSelect from "./specials/FormTypeSelect";
 import styles from "../styles/form.module.css";
-
 function CreatePokemons() {
+  const [errors, setErrors] = useState({
+    name: "",
+    image: "",
+    life: "",
+    attack: "",
+    defense: "",
+    speed: "",
+    height: "",
+    weight: "",
+  });
   const [pokemon, setPokemon] = useState({
     name: "",
     image: "",
@@ -26,19 +35,61 @@ function CreatePokemons() {
       ...pokemon,
       [name]: value,
     });
+
+    let errorMessage;
+    if (name === "name") {
+      errorMessage = validateTextInput(value, name);
+    } else if (name === "image") {
+      errorMessage = validateImageUrl(value);
+    } else {
+      errorMessage = validateNumInput(value, name);
+    }
+
+    setErrors({
+      ...errors,
+      [name]: errorMessage,
+    });
   }
-  function validateInput(value) {
+
+  function validateNumInput(value, name) {
     if (!value) {
-      return "Please fill in this field";
+      return `Please, set ${name} value for your Pokemon`;
     }
     if (isNaN(value)) {
-      return "Please enter a number";
+      return `Please enter a reasonable numerical ${name} value`;
     }
     if (value <= 0) {
-      return "Please enter a positive number";
+      return `${name} has to be a positive number`;
     }
     if (value > 999) {
-      return "Please enter a 3 digit number";
+      return `${name} cannot be greater than a 3 digit number`;
+    }
+    return "";
+  }
+
+  function validateTextInput(value, name) {
+    if (!value) {
+      return `Please, set a proper ${name} for your Pokemon`;
+    }
+    if (/[^a-zA-Z]/.test(value)) {
+      return `${name} must be composed of letters only!`;
+    }
+    if (value.length > 20) {
+      return `${name} cannot be longer than 20 characters`;
+    }
+
+    if (!isNaN(value)) {
+      return `${name} must be composed of letters only!`;
+    }
+    return "";
+  }
+
+  function validateImageUrl(value, name) {
+    if (!value) {
+      return `Please provide an ${name} URL`;
+    }
+    if (!/^https?:\/\/\S+\.(?:png|jpg|jpeg|gif)$/i.test(value)) {
+      return "Please provide a valid image URL ending in .png, .jpg, .jpeg, or .gif";
     }
     return "";
   }
@@ -49,13 +100,27 @@ function CreatePokemons() {
     const form = document.getElementById("form");
     const inputs = form.querySelectorAll("input");
     let formIsValid = true;
+
     inputs.forEach((input) => {
-      const validationMessage = validateInput(input.value);
+      const validationMessage =
+        input.name === "name"
+          ? validateTextInput(input.value, input.name)
+          : input.name === "image"
+          ? validateImageUrl(input.value)
+          : validateNumInput(input.value, input.name);
       if (validationMessage) {
         input.setCustomValidity(validationMessage);
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [input.name]: validationMessage,
+        }));
         formIsValid = false;
       } else {
         input.setCustomValidity("");
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [input.name]: "",
+        }));
       }
     });
 
@@ -100,7 +165,13 @@ function CreatePokemons() {
           name="name"
           value={pokemon.name}
           onChange={handleChange}
+          className={validateTextInput(pokemon.name) ? "invalid" : "valid"}
         />
+        {validateTextInput(pokemon.name) && (
+          <label className={styles.errorMessage}>
+            {validateTextInput(pokemon.name, "Name")}
+          </label>
+        )}
 
         <label className={`${styles.labelTitle}`}>Image:</label>
         <input
@@ -108,8 +179,13 @@ function CreatePokemons() {
           id="image"
           name="image"
           value={pokemon.image}
-          onChange={handleChange}
+          className={validateImageUrl(pokemon.image) ? "invalid" : "valid"}
         />
+        {validateImageUrl(pokemon.image) && (
+          <label className={styles.errorMessage}>
+            {validateImageUrl(pokemon.name, "Image")}
+          </label>
+        )}
 
         <label className={`${styles.labelTitle}`}>Life:</label>
         <input
@@ -118,13 +194,13 @@ function CreatePokemons() {
           name="life"
           value={pokemon.life}
           onChange={handleChange}
-          className={
-            validateInput(pokemon.life) ? styles.invalid : styles.valid
-          }
+          className={`input-field ${
+            validateNumInput(pokemon.life) ? "invalid" : "valid"
+          }`}
         />
-        {validateInput(pokemon.life) && (
+        {validateNumInput(pokemon.life) && (
           <label className={styles.errorMessage}>
-            {validateInput(pokemon.life)}
+            {validateNumInput(pokemon.life, "Life")}
           </label>
         )}
 
@@ -135,8 +211,13 @@ function CreatePokemons() {
           name="attack"
           value={pokemon.attack}
           onChange={handleChange}
+          className={validateNumInput(pokemon.attack) ? "invalid" : "valid"}
         />
-
+        {validateNumInput(pokemon.attack) && (
+          <label className={styles.errorMessage}>
+            {validateNumInput(pokemon.attack, "Attack")}
+          </label>
+        )}
         <label className={`${styles.labelTitle}`}>Defense:</label>
         <input
           type="number"
@@ -144,8 +225,13 @@ function CreatePokemons() {
           name="defense"
           value={pokemon.defense}
           onChange={handleChange}
+          className={validateNumInput(pokemon.defense) ? "invalid" : "valid"}
         />
-
+        {validateNumInput(pokemon.defense) && (
+          <label className={styles.errorMessage}>
+            {validateNumInput(pokemon.defense, "Defense")}
+          </label>
+        )}
         <label className={`${styles.labelTitle}`}>Speed:</label>
         <input
           type="number"
@@ -153,8 +239,13 @@ function CreatePokemons() {
           name="speed"
           value={pokemon.speed}
           onChange={handleChange}
+          className={validateNumInput(pokemon.speed) ? "invalid" : "valid"}
         />
-
+        {validateNumInput(pokemon.speed) && (
+          <label className={styles.errorMessage}>
+            {validateNumInput(pokemon.speed, "Speed")}
+          </label>
+        )}
         <label className={`${styles.labelTitle}`}>Height:</label>
         <input
           type="number"
@@ -162,8 +253,13 @@ function CreatePokemons() {
           name="height"
           value={pokemon.height}
           onChange={handleChange}
+          className={validateNumInput(pokemon.height) ? "invalid" : "valid"}
         />
-
+        {validateNumInput(pokemon.height) && (
+          <label className={styles.errorMessage}>
+            {validateNumInput(pokemon.height, "Height")}
+          </label>
+        )}
         <label className={`${styles.labelTitle}`}>Weight:</label>
         <input
           type="number"
@@ -171,10 +267,16 @@ function CreatePokemons() {
           name="weight"
           value={pokemon.weight}
           onChange={handleChange}
+          className={validateNumInput(pokemon.weight) ? "invalid" : "valid"}
         />
+        {validateNumInput(pokemon.weight) && (
+          <label className={styles.errorMessage}>
+            {validateNumInput(pokemon.weight, "Weight")}
+          </label>
+        )}
 
         <label className={`${styles.labelTitle}`}>Types:</label>
-        <FormTypeSelect setPokemon={setPokemon} />
+        <FormTypeSelect setPokemon={setPokemon} handleSubmit={handleSubmit} />
         <br />
         <button type="submit" className={`${styles.submitButton}`}>
           Create Pokemon
