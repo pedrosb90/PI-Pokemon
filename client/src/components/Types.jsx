@@ -17,10 +17,13 @@ const Types = () => {
   console.log(typeInfo);
   return (
     <div>
-      <h1 className={`${styles.title}`}>Types</h1>
+      <h1 className={`${styles.title}`}>Pokemon Types</h1>
       <ul className={`${styles1.typeContainer} `}>
         {typeInfo.map((type, index) => (
-          <li className={`${styles1.typeCard} ${styles3.typeText}`} key={index}>
+          <li
+            className={`${styles1.typeCard} ${styles3.typeText} ${styles1.typeCardImage} `}
+            key={index}
+          >
             {type.name.charAt(0).toUpperCase() + type.name.slice(1)}
           </li>
         ))}

@@ -1,31 +1,31 @@
 .container {
   display: grid;
-  flex-wrap: wrap;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(4, auto);
-  grid-gap: 0%;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-rows: repeat(6, auto);
+  gap: 16px;
   padding: 10px;
   justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
 }
+
 .card {
-  border-radius: 85px;
-  border: 6px solid white;
+  border-radius: 50px;
+  border: 3px solid white;
   margin-bottom: 35px;
   padding: 30px;
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex;
   align-items: center;
-  width: 180px;
-  height: 280px;
+  width: 90px;
+  height: 180px;
 }
 
 .card h1 {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   margin-top: 0;
   margin-bottom: 10px;
@@ -34,25 +34,19 @@
 }
 
 .card img {
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 65px;
 }
 
 .card h2 {
-  font-size: 12px;
-  margin-top: 15px;
-  margin-bottom: 5px;
+  font-size: 10px;
+  margin-top: -20px;
+  margin-bottom: 1px;
   font-weight: bold;
 }
 
 .card p {
-  font-size: 11px;
+  font-size: 10px;
   margin: 0;
   text-transform: capitalize;
-}
-
-.card .buttonDetails {
-  margin-top: 10px;
-  width: 50px;
-  height: 25px;
 }

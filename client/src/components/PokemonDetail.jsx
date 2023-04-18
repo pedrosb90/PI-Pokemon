@@ -21,10 +21,14 @@ const PokemonDetail = ({ pokeId }) => {
 
     return (
       <div>
+        <h1 className={`${styles.titleMain}`}>Pokemon Detail</h1>{" "}
         <div className={`${styles.content} ${styles.container}`}>
-          <h1 className={`${styles.titleMain}`}>Pokemon Detail</h1>{" "}
           <h2 className={` ${styles.title}`}>{capiTitle}</h2>
-          <img src={pokeDetail.image} alt={pokeDetail.name} />
+          <img
+            src={pokeDetail.image}
+            alt={pokeDetail.name}
+            className={styles.image}
+          />
           <p>ID: {pokeDetail.pokeId}</p>
           <p>Life: {pokeDetail.life}</p>
           <p>Attack: {pokeDetail.attack}</p>

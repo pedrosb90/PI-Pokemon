@@ -31,17 +31,16 @@ const DisplayPokemons = () => {
             <h1>{name.charAt(0).toUpperCase() + name.slice(1)}</h1>
             <img src={image} alt={name} />
             <div>
+              <h2>Types: </h2>
+              {types.map(({ slot, name }) => (
+                <p key={slot}>{name.charAt(0).toUpperCase() + name.slice(1)}</p>
+              ))}
               <Link
-                className={`${styles4.buttonDetails}`}
                 to={`/pokemons/${pokeId}`}
                 onClick={() => dispatch(getPokemonById(pokeId))}
               >
                 <DetailLink />
               </Link>
-              <h2>Types: </h2>
-              {types.map(({ slot, name }) => (
-                <p key={slot}>{name.charAt(0).toUpperCase() + name.slice(1)}</p>
-              ))}
             </div>
           </div>
         ))}

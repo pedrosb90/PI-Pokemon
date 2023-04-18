@@ -1,37 +1,32 @@
-.container {
-  display: grid;
-  grid-template-columns: repeat(6, 2fr);
-  grid-gap: 20px;
-  padding: 10px;
-  align-items: flex-end;
-  max-height: 750px;
-  overflow: scroll;
-}
-
 .typeContainer {
   display: grid;
-  grid-template-columns: repeat(6, 2fr);
-  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-rows: repeat(6, auto);
+  gap: 16px;
   padding: 10px;
-  align-items: flex-end;
-  max-height: 750px;
-  overflow: scroll;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }
 .typeCard {
-  border-radius: 200px;
+  border-radius: 60px;
   border-bottom: 5px;
   border-top: 30px;
   margin-bottom: 45px;
   padding: 50px 50px;
   text-align: center;
-  background-size: 200%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  opacity: 100%;
-  border: 6px solid white;
-  width: 220px;
-  height: 120px;
+  border: 3px solid white;
+  width: 60px;
+  height: 60px;
+}
+.typeCardImage {
+  background-size: 100%;
+  background-image: url("/Users/pedro/Desktop/Henry/P INDIVIDUALES/PI-Pokemon-main/client/src/pokemonTypesIMG.png");
+  opacity: 0.8;
 }

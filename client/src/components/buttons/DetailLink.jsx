@@ -5,7 +5,7 @@ function DetailLink(props) {
   return (
     <div>
       {" "}
-      <button className={`${styles.buttonDetails} `}>Details:</button>
+      <button className={`${styles.buttonDetails} `}>Details</button>
     </div>
   );
 }

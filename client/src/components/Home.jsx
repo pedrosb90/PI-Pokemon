@@ -7,10 +7,10 @@ import styles from "../styles/bodyText.module.css";
 const Home = () => {
   return (
     <div>
-      <h1 className={`${styles.title}`}>Home</h1>
       <Link to="/types">
         <TypesButton />
       </Link>
+      <h1 className={`${styles.title}`}>Home</h1>
       <DisplayPokemons />
     </div>
   );

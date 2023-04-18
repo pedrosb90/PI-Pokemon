@@ -6,7 +6,7 @@
 
 .button {
   display: inline-block;
-  padding: 8px 16px;
+  padding: 8px 6px;
   margin: 0 4px;
   font-size: 16px;
   font-weight: bold;
@@ -28,7 +28,7 @@
   font-size: 16px;
   font-weight: bold;
   color: #333;
-  border: 1px solid #ccc;
+  border: 6px solid #ccc;
   border-radius: 4px;
 }
 
@@ -36,5 +36,5 @@
   font-size: 16px;
   font-weight: bold;
   color: #333;
-  margin: 0 16px;
+  margin: 16px;
 }

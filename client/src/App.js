@@ -17,16 +17,13 @@ function App() {
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        height: "100%",
+        height: "80",
         width: "100%",
-        margin: 0,
       }}
     >
-      <div>
-        <Link to="/home">
-          <HomeButton>Home</HomeButton>
-        </Link>
-      </div>
+      <Link to="/home">
+        <HomeButton>Home</HomeButton>
+      </Link>
       <Route exact path="/welcome" component={Landing} />
       <Route exact path="/home" component={Home} />
       <Route exact path="/types" component={Types} />

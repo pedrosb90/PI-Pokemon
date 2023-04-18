@@ -1,11 +1,10 @@
 import React from "react";
-
-// import styles from "../../styles/filterbuttons/home.module.css";
+import styles from "../../styles/accesories/buttons.module.css";
 
 function TypesButton() {
   return (
     <div>
-      <button>Go to types</button>
+      <button className={styles.buttonTypes}>See Types</button>
     </div>
   );
 }

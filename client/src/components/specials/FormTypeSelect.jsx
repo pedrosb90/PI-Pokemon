@@ -29,7 +29,6 @@ const FormTypeSelect = ({ setPokemon }) => {
       setError("");
     }
   };
-
   const handleRemoveType = (typeId) => {
     setSelectedTypes(selectedTypes.filter((t) => t !== typeId));
     setPokemon((prevState) => ({
@@ -37,7 +36,6 @@ const FormTypeSelect = ({ setPokemon }) => {
       typeIds: prevState.typeIds.filter((id) => id !== typeId),
     }));
   };
-
   return (
     <div>
       <input

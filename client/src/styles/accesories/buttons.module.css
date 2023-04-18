@@ -15,18 +15,36 @@
   background-color: rgba(178, 42, 162, 0.8);
   cursor: pointer;
 }
-.buttonDetails {
-  display: inline-block;
-  padding: 5px 10px;
-  background-color: rgba(128, 128, 128, 0.3);
+.buttonTypes {
+  background-color: rgba(0, 245, 187, 0.5);
+  text-shadow: 4px 4px 4px rgb(204, 204, 204);
+  margin-top: -10px;
   color: white;
-  font-weight: lighter;
-  font-size: 14pt;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 1px 1px 2px black;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+}
+.buttonTypes:hover {
+  background-color: rgb(255, 204, 49);
+  cursor: pointer;
+}
+.buttonDetails {
+  position: relative;
+  bottom: 10px;
+  top: -10px;
+  background-color: #8080804d;
+  color: white;
+  font-weight: bolder;
+  font-size: 11pt;
   border-radius: 8px;
   border: none;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  z-index: 1; /* add a higher z-index value */
+  z-index: 1;
+  width: 62px;
+  height: 25px;
 }
 
 .buttonDetails:hover {
