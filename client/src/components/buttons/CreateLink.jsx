@@ -3,7 +3,7 @@ import React from "react";
 function CreateLink() {
   return (
     <div>
-      <button>Create another Pokemon</button>
+      <button>Create Pokemon</button>
     </div>
   );
 }

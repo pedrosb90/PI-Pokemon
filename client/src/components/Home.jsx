@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import TypesButton from "./buttons/TypesButton";
 import DisplayPokemons from "./DisplayPokemons";
 import styles from "../styles/bodyText.module.css";
+import SearchBar from "./search/SearchBar";
+import CreateLink from "./buttons/CreateLink";
 
 const Home = () => {
   return (
@@ -10,7 +12,10 @@ const Home = () => {
       <Link to="/types">
         <TypesButton />
       </Link>
-      <h1 className={`${styles.title}`}>Home</h1>
+      <Link to="/createpokemons">
+        <CreateLink />
+      </Link>
+      <SearchBar />
       <DisplayPokemons />
     </div>
   );
