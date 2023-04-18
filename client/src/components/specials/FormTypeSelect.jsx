@@ -37,30 +37,18 @@ const FormTypeSelect = ({ setPokemon }) => {
       typeIds: prevState.typeIds.filter((id) => id !== typeId),
     }));
   };
-  const validateTypes = () => {
-    if (selectedTypes.length === 0) {
-      setError("Please select at least one type");
-      return false;
-    }
-    return true;
-  };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const isValid = validateTypes();
-    if (isValid) {
-    }
-  };
 
   return (
     <div>
       <input
-        type="text"
+        type="drop"
         placeholder="Select types"
         value={selectedTypes
           .map((t) => t.name.charAt(0).toUpperCase() + t.name.slice(1))
           .join(", ")}
         onClick={toggleDropdown}
       />
+
       {isOpen && (
         <ul className={`${styles.typeList}`}>
           {types.map((type) => (

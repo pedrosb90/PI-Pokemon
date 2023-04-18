@@ -1,10 +1,10 @@
 .container {
   display: grid;
   grid-template-columns: repeat(6, 2fr);
-  grid-gap: 18px;
-  padding: 2px;
+  grid-gap: 20px;
+  padding: 10px;
   align-items: flex-end;
-  max-height: 900px;
+  max-height: 750px;
   overflow: scroll;
 }
 

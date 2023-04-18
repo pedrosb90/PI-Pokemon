@@ -1,9 +1,9 @@
-const validateNumInput = (value, name) => {
-  if (!value) {
-    return `Please, set ${name} value for your Pokemon`;
+const validateNumInput = (value, name = "") => {
+  if (isNaN(value) || !/^\d+$/.test(value)) {
+    return `Please enter a valid numerical ${name} value`;
   }
-  if (isNaN(value)) {
-    return `Please enter a reasonable numerical ${name} value`;
+  if (!value) {
+    return `${name} is required`;
   }
   if (value <= 0) {
     return `${name} has to be a positive number`;
@@ -11,12 +11,12 @@ const validateNumInput = (value, name) => {
   if (value > 999) {
     return `${name} cannot be greater than a 3 digit number`;
   }
-  return "";
+  return null;
 };
 
 const validateTextInput = (value, name) => {
   if (!value) {
-    return `Please, set a proper ${name} for your Pokemon`;
+    return `${name} is required`;
   }
   if (/[^a-zA-Z]/.test(value)) {
     return `${name} must be composed of letters only!`;
@@ -28,17 +28,17 @@ const validateTextInput = (value, name) => {
   if (!isNaN(value)) {
     return `${name} must be composed of letters only!`;
   }
-  return "";
+  return null;
 };
 
 const validateImageUrl = (value, name) => {
   if (!value) {
-    return `Please provide an ${name} URL`;
+    return `${name} is required`;
   }
   if (!/^https?:\/\/\S+\.(?:png|jpg|jpeg|gif)$/i.test(value)) {
     return "Please provide a valid image URL ending in .png, .jpg, .jpeg, or .gif";
   }
-  return "";
+  return null;
 };
 
 module.exports = {

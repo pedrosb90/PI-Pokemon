@@ -18,8 +18,8 @@
   line-height: 1;
 }
 .containerTitle {
-  width: 100%;
-  max-width: 200px;
+  width: 60%;
+  max-width: 300px;
   height: 150px;
   position: relative;
   margin: 9px auto 0;
@@ -116,14 +116,6 @@ input[type="text"] {
   margin: 0 auto;
 }
 
-input[type="text"].invalid {
-  border: 2px solid red;
-}
-
-input[type="text"].valid {
-  border: 2px solid green;
-}
-
 input[type="number"] {
   width: 120pt;
   padding: 10px;
@@ -132,14 +124,6 @@ input[type="number"] {
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
   display: block;
   margin: 0 auto;
-}
-
-input[type="number"].invalid {
-  border: 2px solid red;
-}
-
-input[type="number"].valid {
-  border: 2px solid green;
 }
 
 .submitButton {
@@ -159,5 +143,27 @@ input[type="number"].valid {
 }
 .errorMessage {
   font-size: 10pt;
-  color: red;
+  color: rgb(248, 5, 163);
+}
+.disabledButton {
+  background-color: rgb(248, 5, 74);
+  font-size: large;
+  font-weight: 900;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 12px;
+  cursor: pointer;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+.enabledButton {
+  background-color: #4caf50;
+  font-size: large;
+  font-weight: 900;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 12px;
+  cursor: pointer;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
 }

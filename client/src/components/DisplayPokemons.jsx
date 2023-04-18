@@ -2,11 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getAllPokemons, getPokemonById } from "../actions/index";
-import styles1 from "../styles/pokeCards.module.css";
-import styles2 from "../styles/infoText.module.css";
-import styles3 from "../styles/cardDisplay.module.css";
+import styles3 from "../styles/cards.module.css";
 import styles4 from "../styles/accesories/buttons.module.css";
-import styles5 from "../styles/bodyText.module.css";
 import DetailLink from "./buttons/DetailLink";
 import Pagination from "./specials/Pagination";
 
@@ -30,7 +27,7 @@ const DisplayPokemons = () => {
       {pokemons
         .slice((page - 1) * perPage, (page - 1) * perPage + perPage)
         .map(({ pokeId, name, image, types }) => (
-          <div className={`${styles1.card} ${styles2.content}`} key={pokeId}>
+          <div className={`${styles3.card} ${styles3.content}`} key={pokeId}>
             <h1>{name.charAt(0).toUpperCase() + name.slice(1)}</h1>
             <img src={image} alt={name} />
             <div>
@@ -50,7 +47,18 @@ const DisplayPokemons = () => {
         ))}
       <br />
 
-      <Pagination page={page} setPage={setPage} max={max} />
+      <Pagination
+        page={page}
+        setPage={setPage}
+        max={max}
+        style={{
+          position: "absolute",
+          bottom: 0,
+          width: "100%",
+          padding: "10px",
+          backgroundColor: "#fff",
+        }}
+      />
     </div>
   );
 };

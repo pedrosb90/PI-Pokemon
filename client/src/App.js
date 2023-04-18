@@ -6,6 +6,7 @@ import Types from "./components/Types";
 import PokemonDetail from "./components/PokemonDetail";
 import CreatePokemons from "./components/CreatePokemons";
 import HomeButton from "./components/buttons/HomeButton";
+import SuccessPage from "./components/specials/SuccessFormPage";
 import backgroundImage from "/Users/pedro/Desktop/Henry/P INDIVIDUALES/PI-Pokemon-main/client/src/40128.jpeg";
 
 function App() {
@@ -16,9 +17,8 @@ function App() {
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        height: "120%",
+        height: "100%",
         width: "100%",
-        zoom: 0.65,
         margin: 0,
       }}
     >
@@ -27,10 +27,10 @@ function App() {
           <HomeButton>Home</HomeButton>
         </Link>
       </div>
-
       <Route exact path="/welcome" component={Landing} />
       <Route exact path="/home" component={Home} />
       <Route exact path="/types" component={Types} />
+      <Route exact path="/success-page" component={SuccessPage} />
       <Route path="/pokemons/:pokeId" component={PokemonDetail} />
       <Route path="/createpokemons" component={CreatePokemons} />
     </div>

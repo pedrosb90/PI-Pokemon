@@ -17,12 +17,12 @@
 }
 .buttonDetails {
   display: inline-block;
-  padding: 8px 16px;
+  padding: 5px 10px;
   background-color: rgba(128, 128, 128, 0.3);
   color: white;
   font-weight: lighter;
-  font-size: 12pt;
-  border-radius: 5px;
+  font-size: 14pt;
+  border-radius: 8px;
   border: none;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;

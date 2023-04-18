@@ -1,9 +1,11 @@
 .container {
   background-color: rgba(128, 128, 128, 0.5);
   border-radius: 10px;
-  padding: 20px;
+  padding: 25px;
   width: 600px;
+  height: 900px;
   margin: 0 auto;
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -12,10 +14,12 @@
 
 .content {
   text-align: center;
+  position: relative;
+  top: -px;
 }
 
 .title {
-  margin-bottom: 20px;
+  margin-bottom: 150px;
   font-weight: bold;
   text-shadow: 0px 0px 20px #ffd700, 0px 0px 10px #ffd700,
     1px 1px 2px rgba(0, 0, 0, 0.5);
@@ -27,12 +31,10 @@
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
   font-size: 24pt;
 }
-
 .content {
   color: white;
   font-size: 13pt;
-
-  margin-bottom: 15px;
+  margin-bottom: 45px;
   text-shadow: 8px 8px 8px rgb(1, 1, 1);
 }
 .contentMain {

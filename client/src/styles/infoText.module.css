@@ -1,11 +1,9 @@
 .content {
-  color: white;
   font-size: 13pt;
-
+  color: white;
   margin-bottom: 15px;
   text-shadow: 8px 8px 8px rgb(1, 1, 1);
 }
-
 .typeText {
   color: white;
   font-size: 16pt;
