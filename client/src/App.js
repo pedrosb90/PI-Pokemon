@@ -19,7 +19,7 @@ function App() {
         backgroundPosition: "center",
         height: "80",
         width: "100%",
-        zoom: "0.9",
+        // zoom: "0.9",
       }}
     >
       <Link to="/home">

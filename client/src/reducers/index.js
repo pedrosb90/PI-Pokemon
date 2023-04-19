@@ -4,6 +4,9 @@ import {
   GET_TYPES,
   CREATE_POKEMON,
   SET_TYPES,
+  GET_POKEMON_BY_NAME,
+  SET_POKEMON,
+  RESET_POKEMON_FOUND,
 } from "../actions/index.js";
 
 const initialState = {
@@ -19,7 +22,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         pokemons: action.payload,
       };
-
     case GET_POKEMON_BY_ID:
       return {
         ...state,
@@ -30,7 +32,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         types: action.payload,
       };
-
     case SET_TYPES:
       return {
         types: action.payload,
@@ -41,6 +42,20 @@ const rootReducer = (state = initialState, action) => {
         newPokemon: action.payload,
         pokemons: [...state.pokemons, action.payload],
       };
+    case GET_POKEMON_BY_NAME:
+      return {
+        ...state,
+        pokemons: action.payload,
+      };
+    case SET_POKEMON:
+      return {
+        pokemons: action.payload,
+      };
+    // case RESET_POKEMON_FOUND:
+    //   return {
+    //     ...state,
+    //     pokemons: [],
+    //   };
 
     default:
       return state;

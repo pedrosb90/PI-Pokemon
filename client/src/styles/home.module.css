@@ -18,3 +18,10 @@
   text-shadow: 6px 6px 6px rgb(1, 1, 1);
   line-height: 1;
 }
+.img {
+  margin-top: -52px;
+  margin-bottom: -25px;
+  width: 260px;
+  height: 110px;
+  flex-wrap: wrap;
+}

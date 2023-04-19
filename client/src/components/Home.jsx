@@ -5,11 +5,12 @@ import DisplayPokemons from "./DisplayPokemons";
 import styles from "../styles/home.module.css";
 import SearchBar from "./search/SearchBar";
 import CreateButton from "./buttons/CreateButton";
+import titleImg from "/Users/pedro/Desktop/Henry/P INDIVIDUALES/PI-Pokemon-main/client/src/pokeLogo.png";
 
 const Home = () => {
   return (
     <div>
-      <h1 className={styles.title}>Pokemons</h1>
+      <img src={titleImg} alt="titleImage" className={styles.img}></img>
       <Link to="/types">
         <TypesButton />
       </Link>
