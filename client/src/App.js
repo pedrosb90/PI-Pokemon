@@ -7,7 +7,7 @@ import PokemonDetail from "./components/PokemonDetail";
 import CreatePokemons from "./components/CreatePokemons";
 import HomeButton from "./components/buttons/HomeButton";
 import SuccessPage from "./components/specials/SuccessFormPage";
-import backgroundImage from "/Users/pedro/Desktop/Henry/P INDIVIDUALES/PI-Pokemon-main/client/src/40128.jpeg";
+import backgroundImage from "/Users/pedro/Desktop/Henry/P INDIVIDUALES/PI-Pokemon-main/client/src/40129.jpeg";
 
 function App() {
   return (
@@ -19,6 +19,7 @@ function App() {
         backgroundPosition: "center",
         height: "80",
         width: "100%",
+        zoom: "0.9",
       }}
     >
       <Link to="/home">

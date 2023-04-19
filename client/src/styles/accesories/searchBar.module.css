@@ -1,16 +1,67 @@
 .searchBar {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 45px;
+  flex-direction: row;
+  justify-items: center;
+  border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.487);
-  width: 900px;
-  height: 150px;
+  width: 90%;
+  height: 90%;
   margin: 0 auto;
+  place-items: center;
 }
 
-.searchBar > * {
+.label {
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.box {
+  padding: 1px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 13px;
+  height: 36px;
+  width: 100%;
+  max-width: 165px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.button {
+  border-radius: 8px;
+  background-color: #7200d5;
+  border: none;
+  color: white;
+  padding: 12px 12px;
+  text-align: center;
+  display: justify;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 90px;
   margin: 5px;
+}
+button[type="reset"] {
+  background-color: rgb(208, 9, 58);
+  color: white;
+  width: 70px;
+}
+button[type="find"] {
+  background-color: rgb(142, 9, 78);
+  color: white;
+  width: 83px;
+  margin: 5px;
+}
+button[type="sort"] {
+  background-color: rgb(142, 9, 78);
+  color: white;
+  width: 115px;
+  height: 48px;
+  margin-bottom: 1px;
+}
+
+.button:hover {
+  background-color: #f4118a;
 }

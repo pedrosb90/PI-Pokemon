@@ -8,7 +8,6 @@ import {
   validateTextInput,
 } from "../components/specials/formValidations";
 import FormTypeSelect from "./specials/FormTypeSelect";
-import SuccessPage from "./specials/SuccessFormPage";
 import styles from "../styles/form.module.css";
 
 function CreatePokemons() {

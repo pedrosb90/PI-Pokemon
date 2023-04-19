@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "../../styles/accesories/buttons.module.css";
 
-function TypesButton() {
+function CreateButton() {
   return (
     <div>
-      <button className={styles.buttonOption}>See Types</button>
+      <button className={styles.buttonOption}>Create Pokemon</button>
     </div>
   );
 }
 
-export default TypesButton;
+export default CreateButton;

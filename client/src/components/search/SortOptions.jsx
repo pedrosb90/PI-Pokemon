@@ -1,12 +1,17 @@
 import React from "react";
-import SortAttack from "./child/SortAttack";
-import SortAZ from "./child/SortAZ";
+import styles from "../../styles/accesories/searchBar.module.css";
 
 function SortOptions() {
   return (
     <div>
-      <SortAZ />
-      <SortAttack />
+      <button type="sort" className={styles.button}>
+        {" "}
+        Sort Alphabetically
+      </button>
+      <br />
+      <button type="sort" className={styles.button}>
+        Sort by Attack Force
+      </button>
     </div>
   );
 }

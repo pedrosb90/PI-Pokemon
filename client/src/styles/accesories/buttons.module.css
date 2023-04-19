@@ -1,7 +1,6 @@
 .buttonHome {
   background-color: rgba(53, 20, 76, 0.5);
   text-shadow: 4px 4px 4px rgb(204, 204, 204);
-
   color: white;
   font-weight: bold;
   border-radius: 5px;
@@ -16,6 +15,7 @@
   cursor: pointer;
 }
 .buttonTypes {
+  display: flex;
   background-color: rgba(0, 245, 187, 0.5);
   text-shadow: 4px 4px 4px rgb(204, 204, 204);
   margin-top: -10px;
@@ -50,4 +50,22 @@
 .buttonDetails:hover {
   background-color: rgba(182, 228, 95, 0.8);
   transform: translateY(-2px);
+}
+.buttonOption {
+  background-color: rgba(93, 93, 93, 0.5);
+  text-shadow: 1px 1px 1px rgb(204, 204, 204);
+  margin-top: -10px;
+  color: white;
+  font-weight: 300;
+  font-size: 12pt;
+  border-radius: 15px;
+  border: none;
+  padding: 20px 12px;
+  transition: all 0.2s ease;
+  margin-top: -50px;
+}
+
+.buttonOption:hover {
+  background-color: rgb(126, 67, 139);
+  cursor: pointer;
 }

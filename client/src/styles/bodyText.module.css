@@ -1,12 +1,11 @@
 .title {
-  margin-top: auto;
+  margin-top: -40px;
   color: white;
   font-size: 20pt;
-  font-weight: 400;
+  font-weight: 800;
   text-shadow: 6px 6px 6px rgb(1, 1, 1);
   line-height: 1;
 }
-
 .container {
   display: flex;
   justify-content: center;
