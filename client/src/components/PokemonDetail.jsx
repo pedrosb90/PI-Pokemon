@@ -2,10 +2,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getPokemonById } from "../actions/index";
 import styles from "../styles/pokeDetail.module.css";
+import { useParams } from "react-router-dom";
 
-const PokemonDetail = ({ pokeId }) => {
+const PokemonDetail = () => {
   const pokeDetail = useSelector((state) => state.pokeDetail);
-
+  const { pokeId } = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {

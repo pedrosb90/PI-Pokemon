@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { resetPokemon, getPokemonByName, getPokemonById } from "../../actions";
+import { getPokemonByName } from "../../actions";
 import styles from "../../styles/accesories/searchBar.module.css";
-import { useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 function SearchPokemon() {
   const [selectedPokemon, setSelectedPokemon] = useState("");
+  const [redirect, setRedirect] = useState(false);
 
   const dispatch = useDispatch();
-  const history = useHistory();
   const pokemons = useSelector((state) => state.pokemons);
   const menu = pokemons.map((pokemon) => pokemon.name);
   const pokemonFound = useSelector((state) => state.pokemonFound);
@@ -19,14 +19,14 @@ function SearchPokemon() {
 
   const handleFindPokemon = async () => {
     await dispatch(getPokemonByName(selectedPokemon));
-
     if (pokemonFound && pokemonFound.pokeId) {
-      history.push(`/pokemon/${pokemonFound.pokeId}`);
+      setRedirect(true);
     }
   };
-  const handleReset = () => {
-    dispatch(resetPokemon());
-  };
+
+  if (redirect && pokemonFound.pokeId) {
+    return <Redirect to={`/pokemons/${pokemonFound.pokeId}`} />;
+  }
 
   return (
     <div>
@@ -39,14 +39,7 @@ function SearchPokemon() {
         >
           Find
         </button>
-        <button
-          type="reset"
-          className={styles.button}
-          onClick={handleReset}
-          disabled={!selectedPokemon}
-        >
-          Reset
-        </button>
+
         <select
           value={selectedPokemon}
           onChange={handleSelectPokemon}
