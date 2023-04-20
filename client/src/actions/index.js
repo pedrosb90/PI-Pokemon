@@ -6,7 +6,7 @@ export const SET_TYPES = "SET_TYPES";
 export const CREATE_POKEMON = "CREATE_POKEMON";
 export const GET_POKEMON_BY_NAME = "GET_POKEMON_BY_NAME";
 export const SET_POKEMON = "SET_POKEMON";
-export const RESET_POKEMON_FOUND = "SET_POKEMON";
+export const RESET_POKEMON = "RESET_POKEMON";
 
 // export const SET_POKE_MENU = "SET_POKE_MENU";
 
@@ -103,11 +103,13 @@ export const createPokemon = (pokemon) => {
     }
   };
 };
-// export const setPokemon = (pokemon) => ({
-//   type: SET_POKEMON,
-//   payload: pokemon,
-// });
-
-export const resetPokemonFound = () => ({
-  type: RESET_POKEMON_FOUND,
+export const setPokemon = (pokemon) => ({
+  type: SET_POKEMON,
+  payload: pokemon,
 });
+
+export const resetPokemon = () => {
+  return {
+    type: RESET_POKEMON,
+  };
+};

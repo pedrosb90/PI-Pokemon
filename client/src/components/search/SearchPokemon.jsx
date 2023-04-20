@@ -1,33 +1,31 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import DetailLink from "../buttons/DetailLink";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setPokemon, getPokemonByName } from "../../actions";
+import { resetPokemon, getPokemonByName, getPokemonById } from "../../actions";
 import styles from "../../styles/accesories/searchBar.module.css";
-import styles3 from "../../styles/cards.module.css";
+import { useHistory } from "react-router-dom";
 
 function SearchPokemon() {
   const [selectedPokemon, setSelectedPokemon] = useState("");
 
   const dispatch = useDispatch();
-  // const found = useSelector((state) => state.pokemonFound);
+  const history = useHistory();
   const pokemons = useSelector((state) => state.pokemons);
   const menu = pokemons.map((pokemon) => pokemon.name);
-
-  // const foundPoke = pokemons.filter((pokemon) =>
-  //   pokemon.name.toLowerCase().includes(selectedPokemon.toLowerCase())
-  // );
+  const pokemonFound = useSelector((state) => state.pokemonFound);
 
   const handleSelectPokemon = (event) => {
     setSelectedPokemon(event.target.value);
   };
 
   const handleFindPokemon = async () => {
-    dispatch(getPokemonByName(selectedPokemon));
-  };
+    await dispatch(getPokemonByName(selectedPokemon));
 
+    if (pokemonFound && pokemonFound.pokeId) {
+      history.push(`/pokemon/${pokemonFound.pokeId}`);
+    }
+  };
   const handleReset = () => {
-    selectedPokemon("");
+    dispatch(resetPokemon());
   };
 
   return (
@@ -56,7 +54,7 @@ function SearchPokemon() {
         >
           <option value="">--Pokemon Name.. --</option>
           {menu.map((pokemon) => (
-            <option key={pokemon} value={pokemon}>
+            <option key={pokemon.uuid} value={pokemon}>
               {pokemon}
             </option>
           ))}

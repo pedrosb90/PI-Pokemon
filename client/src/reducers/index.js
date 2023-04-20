@@ -6,7 +6,7 @@ import {
   SET_TYPES,
   GET_POKEMON_BY_NAME,
   SET_POKEMON,
-  RESET_POKEMON_FOUND,
+  RESET_POKEMON,
 } from "../actions/index.js";
 
 const initialState = {
@@ -14,6 +14,7 @@ const initialState = {
   pokeDetail: {},
   types: [],
   newPokemon: {},
+  pokemonFound: {},
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -45,17 +46,17 @@ const rootReducer = (state = initialState, action) => {
     case GET_POKEMON_BY_NAME:
       return {
         ...state,
-        pokemons: action.payload,
+        pokemonFound: action.payload,
       };
     case SET_POKEMON:
       return {
-        pokemons: action.payload,
+        pokemonFound: action.payload,
       };
-    // case RESET_POKEMON_FOUND:
-    //   return {
-    //     ...state,
-    //     pokemons: [],
-    //   };
+    case RESET_POKEMON:
+      return {
+        ...state,
+        pokemonFound: {},
+      };
 
     default:
       return state;
