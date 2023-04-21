@@ -3,12 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllPokemons } from "../actions/index";
 import PokemonCard from "./PokemonCard";
 import styles3 from "../styles/cards.module.css";
-
 import Pagination from "./specials/Pagination";
 
 const DisplayPokemons = () => {
   const dispatch = useDispatch();
   const pokemons = useSelector((state) => state.pokemons);
+  const filteredPokemons = useSelector((state) => state.filtered);
 
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(12);
@@ -23,7 +23,7 @@ const DisplayPokemons = () => {
 
   return (
     <div className={`${styles3.container}`}>
-      {pokemons
+      {(filteredPokemons.length > 0 ? filteredPokemons : pokemons)
         .slice((page - 1) * perPage, (page - 1) * perPage + perPage)
         .map(({ pokeId, name, image, types }) => (
           <PokemonCard

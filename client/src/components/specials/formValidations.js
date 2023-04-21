@@ -28,6 +28,9 @@ const validateTextInput = (value, name) => {
   if (!isNaN(value)) {
     return `${name} must be composed of letters only!`;
   }
+  if (!/^[a-z]+$/.test(value)) {
+    return `${name} cannot contain capital letters!`;
+  }
   return null;
 };
 

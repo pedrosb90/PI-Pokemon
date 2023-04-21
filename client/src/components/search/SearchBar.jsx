@@ -1,14 +1,16 @@
 import React from "react";
-import FilterOptions from "./FilterOptions";
+import OriginFilter from "./OriginFilter";
 import SortOptions from "./SortOptions";
 import SearchPokemon from "./SearchPokemon";
 import styles from "../../styles/accesories/searchBar.module.css";
+import TypesFilter from "./TypesFilter";
 
 const SearchBar = () => {
   return (
     <div className={styles.searchBar}>
       <SearchPokemon />
-      <FilterOptions />
+      <OriginFilter />
+      <TypesFilter />
       <SortOptions />
     </div>
   );

@@ -7,6 +7,7 @@ export const CREATE_POKEMON = "CREATE_POKEMON";
 export const GET_POKEMON_BY_NAME = "GET_POKEMON_BY_NAME";
 export const SET_POKEMON = "SET_POKEMON";
 export const RESET_POKEMON = "RESET_POKEMON";
+export const FILTER_POKEMONS_ORIGIN = "FILTER_POKEMONS_ORIGIN";
 
 // export const SET_POKE_MENU = "SET_POKE_MENU";
 
@@ -16,9 +17,13 @@ export const getAllPokemons = () => {
       console.log("Fetching all pokemons...");
       const pokemons = await axios.get(`http://localhost:3001/pokemons`);
       console.log("Fetched all pokemons:", pokemons.data);
+      const updatedPokemons = pokemons.data.map((pokemon) => ({
+        ...pokemon,
+        origin: "api",
+      }));
       dispatch({
         type: GET_ALL_POKEMONS,
-        payload: pokemons.data,
+        payload: updatedPokemons,
       });
     } catch (error) {
       console.log(error.message);
@@ -59,7 +64,6 @@ export const getPokemonByName = (name) => {
     }
   };
 };
-
 export const setTypes = (types) => ({
   type: SET_TYPES,
   payload: types,
@@ -88,6 +92,10 @@ export const createPokemon = (pokemon) => {
   return async (dispatch) => {
     console.log("Pokemon before POST request:", pokemon);
 
+    if (!pokemon.origin) {
+      pokemon.origin = "created";
+    }
+
     try {
       const response = await axios.post(
         "http://localhost:3001/pokemons",
@@ -112,4 +120,14 @@ export const resetPokemon = () => {
   return {
     type: RESET_POKEMON,
   };
+};
+export const filterPokemonsOrigin = (pokemons) => {
+  try {
+    return {
+      type: FILTER_POKEMONS_ORIGIN,
+      payload: pokemons,
+    };
+  } catch (error) {
+    console.log(error);
+  }
 };

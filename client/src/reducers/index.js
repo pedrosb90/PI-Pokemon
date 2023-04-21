@@ -7,6 +7,7 @@ import {
   GET_POKEMON_BY_NAME,
   SET_POKEMON,
   RESET_POKEMON,
+  FILTER_POKEMONS_ORIGIN,
 } from "../actions/index.js";
 
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
   types: [],
   newPokemon: {},
   pokemonFound: {},
+  filtered: [],
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -56,6 +58,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         pokemonFound: {},
+      };
+    case FILTER_POKEMONS_ORIGIN:
+      return {
+        ...state,
+        filtered: action.payload,
       };
 
     default:

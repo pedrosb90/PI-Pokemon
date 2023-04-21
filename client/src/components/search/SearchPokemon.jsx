@@ -19,11 +19,15 @@ function SearchPokemon() {
 
   const handleFindPokemon = async () => {
     await dispatch(getPokemonByName(selectedPokemon));
-    if (pokemonFound && pokemonFound.pokeId) {
+
+    if (
+      pokemonFound &&
+      pokemonFound.pokeId &&
+      pokemonFound.pokeId.toString().length <= 3
+    ) {
       setRedirect(true);
     }
   };
-
   if (redirect && pokemonFound.pokeId) {
     return <Redirect to={`/pokemons/${pokemonFound.pokeId}`} />;
   }
