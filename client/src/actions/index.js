@@ -148,12 +148,12 @@ export const filterPokemonsOrigin = (originFilter) => {
   };
 };
 
-export const filterByType = (type) => (dispatch, getState) => {
+export const filterByType = (selectedType) => (dispatch, getState) => {
   try {
     const pokemons = getState().pokemons;
 
     const filteredPokes = pokemons.filter((poke) => {
-      return poke.types.includes(type);
+      return poke.types.some((type) => type.name === selectedType);
     });
     dispatch({
       type: FILTER_BY_TYPE,
