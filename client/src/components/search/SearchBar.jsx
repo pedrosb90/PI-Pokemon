@@ -10,7 +10,7 @@ const SearchBar = () => {
     <div className={styles.searchBar}>
       <SearchPokemon />
       <OriginFilter />
-      <TypesFilter />
+      {/* <TypesFilter /> */}
       <SortOptions />
     </div>
   );

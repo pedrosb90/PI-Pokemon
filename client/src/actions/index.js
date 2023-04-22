@@ -8,6 +8,9 @@ export const GET_POKEMON_BY_NAME = "GET_POKEMON_BY_NAME";
 export const SET_POKEMON = "SET_POKEMON";
 export const RESET_POKEMON = "RESET_POKEMON";
 export const FILTER_POKEMONS_ORIGIN = "FILTER_POKEMONS_ORIGIN";
+export const FILTER_BY_TYPE = "FILTER_BY_TYPE";
+export const SORT_POKEMONS_AZ = "SORT_POKEMONS_AZ";
+export const SORT_POKEMONS_BY_ATTACK = "SORT_POKEMONS_BY_ATTACK";
 
 // export const SET_POKE_MENU = "SET_POKE_MENU";
 
@@ -130,4 +133,39 @@ export const filterPokemonsOrigin = (pokemons) => {
   } catch (error) {
     console.log(error);
   }
+};
+export const filterByType = (selectedType) => {
+  try {
+    return (dispatch, getState) => {
+      const { pokemons } = getState();
+      let filtered = [];
+
+      if (selectedType === "") {
+        filtered = pokemons;
+      } else {
+        filtered = pokemons.filter((pokemon) =>
+          pokemon.types.includes(selectedType)
+        );
+      }
+      dispatch({
+        type: FILTER_BY_TYPE,
+        payload: filtered,
+      });
+    };
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const sortPokemonsAZ = (order) => {
+  return {
+    type: SORT_POKEMONS_AZ,
+    payload: order,
+  };
+};
+
+export const sortPokemonsByAttack = (order) => {
+  return {
+    type: SORT_POKEMONS_BY_ATTACK,
+    payload: order,
+  };
 };
