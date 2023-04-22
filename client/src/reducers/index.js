@@ -75,39 +75,74 @@ const rootReducer = (state = initialState, action) => {
 
     case SORT_POKEMONS_AZ:
       const order1 = action.payload === "asc" ? 1 : -1;
-      const sortedPokemons1 = [...state.pokemons].sort((a, b) => {
-        const nameA = a.name.toUpperCase();
-        const nameB = b.name.toUpperCase();
-        if (nameA < nameB) {
-          return -1 * order1;
-        }
-        if (nameA > nameB) {
-          return 1 * order1;
-        }
-        return 0;
-      });
+      const sortedPokemons = [...state.pokemons];
+      let sortedFiltered = [...state.filtered];
+
+      if (sortedFiltered.length) {
+        sortedFiltered = sortedFiltered.sort((a, b) => {
+          const nameA = a.name.toUpperCase();
+          const nameB = b.name.toUpperCase();
+          if (nameA < nameB) {
+            return -1 * order1;
+          }
+          if (nameA > nameB) {
+            return 1 * order1;
+          }
+          return 0;
+        });
+      } else {
+        sortedPokemons.sort((a, b) => {
+          const nameA = a.name.toUpperCase();
+          const nameB = b.name.toUpperCase();
+          if (nameA < nameB) {
+            return -1 * order1;
+          }
+          if (nameA > nameB) {
+            return 1 * order1;
+          }
+          return 0;
+        });
+      }
+
       return {
         ...state,
-        pokemons: sortedPokemons1,
+        pokemons: sortedPokemons,
+        filtered: sortedFiltered,
         sortOrder: action.payload,
       };
 
     case SORT_POKEMONS_BY_ATTACK:
-      const order = action.payload === "asc" ? 1 : -1;
-      const sortedPokemons = [...state.pokemons].sort((a, b) => {
+      const order2 = action.payload === "asc" ? 1 : -1;
+      const sortedPokemons2 = [...state.pokemons].sort((a, b) => {
         if (a.attack < b.attack) {
-          return -1 * order;
+          return -1 * order2;
         }
         if (a.attack > b.attack) {
-          return 1 * order;
+          return 1 * order2;
         }
         return 0;
       });
+      let sortedFiltered2 = [...state.filtered];
+
+      if (sortedFiltered2.length) {
+        sortedFiltered2 = sortedFiltered2.sort((a, b) => {
+          if (a.attack < b.attack) {
+            return -1 * order2;
+          }
+          if (a.attack > b.attack) {
+            return 1 * order2;
+          }
+          return 0;
+        });
+      }
+
       return {
         ...state,
-        pokemons: sortedPokemons,
+        pokemons: sortedPokemons2,
+        filtered: sortedFiltered2,
         sortOrder: action.payload,
       };
+
     default:
       return state;
   }

@@ -134,27 +134,17 @@ export const filterPokemonsOrigin = (pokemons) => {
     console.log(error);
   }
 };
-export const filterByType = (selectedType) => {
-  try {
-    return (dispatch, getState) => {
-      const { pokemons } = getState();
-      let filtered = [];
-
-      if (selectedType === "") {
-        filtered = pokemons;
-      } else {
-        filtered = pokemons.filter((pokemon) =>
-          pokemon.types.includes(selectedType)
-        );
-      }
-      dispatch({
-        type: FILTER_BY_TYPE,
-        payload: filtered,
-      });
-    };
-  } catch (error) {
-    console.log(error);
-  }
+export const filterByType = (type) => {
+  return (dispatch, getState) => {
+    const { pokemons } = getState();
+    const filteredPokemons = pokemons.filter((pokemon) =>
+      type ? pokemon.types.includes(type) : true
+    );
+    dispatch({
+      type: FILTER_BY_TYPE,
+      payload: filteredPokemons,
+    });
+  };
 };
 export const sortPokemonsAZ = (order) => {
   return {

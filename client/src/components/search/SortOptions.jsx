@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useSelector, useState } from "react";
 import { useDispatch } from "react-redux";
 import { sortPokemonsAZ, sortPokemonsByAttack } from "../../actions";
 import styles from "../../styles/accesories/searchBar.module.css";
@@ -6,12 +6,20 @@ import styles from "../../styles/accesories/searchBar.module.css";
 function SortOptions() {
   const dispatch = useDispatch();
 
+  const [sortOrder, setSortOrder] = useState("asc");
+
   const handleSortAZ = (order) => {
-    dispatch(sortPokemonsAZ(order));
+    const newOrder = sortOrder === "asc" ? "desc" : "asc";
+
+    dispatch(sortPokemonsAZ(newOrder));
+    setSortOrder(newOrder);
   };
 
   const handleSortByAttack = (order) => {
-    dispatch(sortPokemonsByAttack(order));
+    const newOrder = sortOrder === "asc" ? "desc" : "asc";
+
+    dispatch(sortPokemonsByAttack(newOrder));
+    setSortOrder(newOrder);
   };
 
   return (
@@ -21,8 +29,7 @@ function SortOptions() {
         className={styles.button}
         onClick={() => handleSortAZ("asc")}
       >
-        {" "}
-        Sort Alphabetically (A-Z)
+        {`Sort Alphabetically ${sortOrder === "asc" ? "A-Z" : "Z-A"}`}
       </button>
       <br />
       <button
@@ -30,7 +37,9 @@ function SortOptions() {
         className={styles.button}
         onClick={() => handleSortByAttack("desc")}
       >
-        Sort by Attack Force (high to low)
+        {`Sort by Attack ${
+          sortOrder === "asc" ? "(low to high)" : "(high to low)"
+        }`}
       </button>
     </div>
   );
