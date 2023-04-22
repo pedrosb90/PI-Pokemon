@@ -12,8 +12,6 @@ export const FILTER_BY_TYPE = "FILTER_BY_TYPE";
 export const SORT_POKEMONS_AZ = "SORT_POKEMONS_AZ";
 export const SORT_POKEMONS_BY_ATTACK = "SORT_POKEMONS_BY_ATTACK";
 
-// export const SET_POKE_MENU = "SET_POKE_MENU";
-
 export const getAllPokemons = () => {
   return async function (dispatch) {
     try {
@@ -124,28 +122,48 @@ export const resetPokemon = () => {
     type: RESET_POKEMON,
   };
 };
-export const filterPokemonsOrigin = (pokemons) => {
+export const filterPokemonsOrigin = (originFilter) => {
+  return (dispatch, getState) => {
+    try {
+      const { pokemons } = getState();
+      let filtered = [];
+
+      if (originFilter === "api") {
+        filtered = pokemons.filter((pokemon) =>
+          pokemon.image.includes("raw.githubusercontent.com/PokeAPI")
+        );
+      } else if (originFilter === "created") {
+        filtered = pokemons.filter(
+          (pokemon) =>
+            !pokemon.image.includes("raw.githubusercontent.com/PokeAPI")
+        );
+      }
+      dispatch({
+        type: FILTER_POKEMONS_ORIGIN,
+        payload: filtered,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const filterByType = (type) => (dispatch, getState) => {
   try {
-    return {
-      type: FILTER_POKEMONS_ORIGIN,
-      payload: pokemons,
-    };
+    const pokemons = getState().pokemons;
+
+    const filteredPokes = pokemons.filter((poke) => {
+      return poke.types.includes(type);
+    });
+    dispatch({
+      type: FILTER_BY_TYPE,
+      payload: filteredPokes,
+    });
   } catch (error) {
     console.log(error);
   }
 };
-export const filterByType = (type) => {
-  return (dispatch, getState) => {
-    const { pokemons } = getState();
-    const filteredPokemons = pokemons.filter((pokemon) =>
-      type ? pokemon.types.includes(type) : true
-    );
-    dispatch({
-      type: FILTER_BY_TYPE,
-      payload: filteredPokemons,
-    });
-  };
-};
+
 export const sortPokemonsAZ = (order) => {
   return {
     type: SORT_POKEMONS_AZ,

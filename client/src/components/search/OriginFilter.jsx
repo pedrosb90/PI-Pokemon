@@ -15,19 +15,10 @@ function OriginFilter() {
       setOriginFilter("");
       return;
     }
-
-    const filtered = pokemons.filter((pokemon) => pokemon.origin === origin);
-    dispatch(filterPokemonsOrigin(filtered));
     setOriginFilter(origin);
   };
   const handleFilterClick = () => {
-    let filtered = pokemons;
-    if (originFilter === "api") {
-      filtered = pokemons.filter((pokemon) => pokemon.origin === "api");
-    } else if (originFilter === "created") {
-      filtered = pokemons.filter((pokemon) => pokemon.origin === undefined);
-    }
-    dispatch(filterPokemonsOrigin(filtered));
+    dispatch(filterPokemonsOrigin(originFilter));
   };
   return (
     <div>
