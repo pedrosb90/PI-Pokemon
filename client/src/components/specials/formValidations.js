@@ -43,9 +43,16 @@ const validateImageUrl = (value, name) => {
   }
   return null;
 };
+const validateType = (selectedTypes) => {
+  if (selectedTypes.length < 1) {
+    return "At least one type must be selected";
+  }
+  return "";
+};
 
 module.exports = {
   validateNumInput,
   validateTextInput,
   validateImageUrl,
+  validateType,
 };

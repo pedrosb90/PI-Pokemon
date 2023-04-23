@@ -48,9 +48,9 @@
   border-radius: 25px;
   position: absolute;
   font-size: 10pt;
-  top: -5%;
-  left: -25%;
-  width: 40%;
+  top: 35%;
+  left: 5%;
+  width: 25%;
 }
 
 .typeList li {
@@ -76,9 +76,10 @@
   line-height: 1;
   text-shadow: 5px 5px 5px rgb(3, 3, 3);
   position: absolute;
-  top: 80%;
-  left: -45%;
+  top: 85%;
+  left: -5%;
 }
+
 .clearTypeButton {
   background-color: #57115d;
   font-size: large;
@@ -97,6 +98,15 @@
 }
 
 input[type="text"] {
+  width: 200pt;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  display: block;
+  margin: 0 auto;
+}
+input[type="drop"] {
   width: 200pt;
   padding: 10px;
   border-radius: 5px;
