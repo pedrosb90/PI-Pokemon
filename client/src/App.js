@@ -8,6 +8,8 @@ import CreatePokemons from "./components/CreatePokemons";
 import HomeButton from "./components/buttons/HomeButton";
 import SuccessPage from "./components/specials/SuccessFormPage";
 import backgroundImage from "/Users/pedro/Desktop/Henry/P INDIVIDUALES/PI-Pokemon-main/client/src/40129.jpeg";
+import axios from "axios";
+axios.defaults.baseURL = "http://localhost:3001/";
 
 function App() {
   return (

@@ -16,7 +16,7 @@ export const getAllPokemons = () => {
   return async function (dispatch) {
     try {
       console.log("Fetching all pokemons...");
-      const pokemons = await axios.get(`http://localhost:3001/pokemons`);
+      const pokemons = await axios.get(`/pokemons`);
       console.log("Fetched all pokemons:", pokemons.data);
       const updatedPokemons = pokemons.data.map((pokemon) => ({
         ...pokemon,
@@ -35,9 +35,7 @@ export const getPokemonById = (pokeId) => {
   return async function (dispatch) {
     try {
       console.log(`Fetching pokemon with ID ${pokeId}...`);
-      const pokemon = await axios.get(
-        `http://localhost:3001/pokemons/${pokeId}`
-      );
+      const pokemon = await axios.get(`/pokemons/${pokeId}`);
       console.log(`Fetched pokemon with ID ${pokeId}:`, pokemon.data);
       dispatch({
         type: GET_POKEMON_BY_ID,
@@ -52,9 +50,7 @@ export const getPokemonByName = (name) => {
   return async function (dispatch) {
     try {
       console.log(`Fetching pokemon with Name ${name}...`);
-      const pokemon = await axios.get(
-        `http://localhost:3001/finder?name=${name}`
-      );
+      const pokemon = await axios.get(`/finder?name=${name}`);
       console.log(`Fetched pokemon with Name ${name}:`, pokemon.data);
       dispatch({
         type: GET_POKEMON_BY_NAME,
@@ -73,7 +69,7 @@ export const setTypes = (types) => ({
 export const getTypes = () => {
   return async function (dispatch) {
     try {
-      const response = await axios.get("http://localhost:3001/types");
+      const response = await axios.get("/types");
       const types = response.data;
 
       const typeObjects = types.map((type, index) => ({
@@ -98,10 +94,7 @@ export const createPokemon = (pokemon) => {
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:3001/pokemons",
-        pokemon
-      );
+      const response = await axios.post("/pokemons", pokemon);
       dispatch({
         type: CREATE_POKEMON,
         payload: response.data,
