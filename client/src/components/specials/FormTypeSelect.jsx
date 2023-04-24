@@ -4,7 +4,7 @@ import { setTypes, getTypes } from "../../actions/index";
 import styles from "../../styles/form.module.css";
 import { validateType } from "../specials/formValidations";
 
-const FormTypeSelect = ({ setPokemon }) => {
+const FormTypeSelect = ({ setPokemon, setCanSubmit }) => {
   const types = useSelector((state) => state.types);
   const dispatch = useDispatch();
 
@@ -28,14 +28,17 @@ const FormTypeSelect = ({ setPokemon }) => {
         typeIds: [...prevState.typeIds, typeId],
       }));
       setError("");
+      setCanSubmit(true);
     }
   };
   const handleRemoveType = (typeId) => {
-    setSelectedTypes(selectedTypes.filter((t) => t !== typeId));
+    const newSelectedTypes = selectedTypes.filter((t) => t !== typeId);
+    setSelectedTypes(newSelectedTypes);
     setPokemon((prevState) => ({
       ...prevState,
       typeIds: prevState.typeIds.filter((id) => id !== typeId),
     }));
+    setCanSubmit(newSelectedTypes.length > 0);
   };
   return (
     <div>

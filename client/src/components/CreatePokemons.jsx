@@ -14,6 +14,7 @@ import styles from "../styles/form.module.css";
 
 function CreatePokemons() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [canSubmit, setCanSubmit] = useState(false);
   const [pokemon, setPokemon] = useState({
     name: "",
     image: "",
@@ -30,7 +31,6 @@ function CreatePokemons() {
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-
     setPokemon({
       ...pokemon,
       [name]: value,
@@ -40,7 +40,8 @@ function CreatePokemons() {
   const handleSubmit = (event) => {
     event.preventDefault();
     setIsSubmitted(true);
-    {
+
+    try {
       const newPokemon = {
         ...pokemon,
         life: parseInt(pokemon.life),
@@ -64,6 +65,8 @@ function CreatePokemons() {
         weight: 0,
         typeIds: [],
       });
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
@@ -80,7 +83,7 @@ function CreatePokemons() {
             <h1 className={`${styles.title}`}>Create your own Pokemon!</h1>
           </div>
           <form
-            novalidate
+            noValidate
             id="form"
             className={`${styles.formDisplay} ${styles.container}`}
             onSubmit={handleSubmit}
@@ -209,6 +212,7 @@ function CreatePokemons() {
             <FormTypeSelect
               setPokemon={setPokemon}
               handleSubmit={handleSubmit}
+              setCanSubmit={setCanSubmit}
             />
             <br />
             <button
@@ -228,11 +232,11 @@ function CreatePokemons() {
                   pokemon.life,
                   pokemon.attack,
                   pokemon.speed,
-
                   pokemon.defense
                 ) ||
                 validateHeightInput(pokemon.height) ||
-                validateWeiInput(pokemon.weight) !== null
+                validateWeiInput(pokemon.weight) !== null ||
+                canSubmit !== true
                   ? styles.disabledButton
                   : styles.enabledButton
               }`}
@@ -251,11 +255,11 @@ function CreatePokemons() {
                   pokemon.life,
                   pokemon.attack,
                   pokemon.speed,
-
                   pokemon.defense
                 ) ||
                 validateHeightInput(pokemon.height) ||
-                validateWeiInput(pokemon.weight) !== null
+                validateWeiInput(pokemon.weight) !== null ||
+                canSubmit !== true
               }
             >
               Create Pokemon
