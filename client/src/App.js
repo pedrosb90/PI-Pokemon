@@ -19,12 +19,13 @@ function App() {
         backgroundPosition: "center",
         height: "80",
         width: "100%",
-        // zoom: "0.9",
+        zoom: "0.9",
       }}
     >
       <Link to="/home">
         <HomeButton>Home</HomeButton>
       </Link>
+      <Route exact path="/" component={Landing} />
       <Route exact path="/welcome" component={Landing} />
       <Route exact path="/home" component={Home} />
       <Route exact path="/types" component={Types} />

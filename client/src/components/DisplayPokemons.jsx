@@ -23,9 +23,9 @@ const DisplayPokemons = () => {
     <div className={`${styles3.container}`}>
       {(filteredPokemons.length > 0 ? filteredPokemons : pokemons)
         .slice((page - 1) * perPage, (page - 1) * perPage + perPage)
-        .map(({ pokeId, name, image, types }) => (
+        .map(({ pokeId, name, image, types, uuid }) => (
           <PokemonCard
-            key={pokeId}
+            key={uuid}
             pokeId={pokeId}
             name={name}
             image={image}

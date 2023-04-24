@@ -3,6 +3,7 @@ function FoundPokemon() {
   return (
     <div className={`${styles3.container}`}>
       <PokemonCard
+        key={found.uuid}
         pokeId={found.pokeId}
         name={found.name}
         image={found.image}

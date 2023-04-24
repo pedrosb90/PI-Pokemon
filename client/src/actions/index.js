@@ -147,7 +147,6 @@ export const filterPokemonsOrigin = (originFilter) => {
     }
   };
 };
-
 export const filterByType = (selectedType) => (dispatch, getState) => {
   try {
     const pokemons = getState().pokemons;
@@ -163,14 +162,12 @@ export const filterByType = (selectedType) => (dispatch, getState) => {
     console.log(error);
   }
 };
-
 export const sortPokemonsAZ = (order) => {
   return {
     type: SORT_POKEMONS_AZ,
     payload: order,
   };
 };
-
 export const sortPokemonsByAttack = (order) => {
   return {
     type: SORT_POKEMONS_BY_ATTACK,

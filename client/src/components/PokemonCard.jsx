@@ -5,11 +5,11 @@ import { getPokemonById } from "../actions";
 import styles from "../styles/cards.module.css";
 import DetailLink from "../components/buttons/DetailLink";
 
-function PokemonCard({ pokeId, name, image, types }) {
+function PokemonCard({ pokeId, name, image, types, uuid }) {
   const dispatch = useDispatch();
 
   return (
-    <div className={`${styles.card} ${styles.content}`} key={pokeId}>
+    <div className={`${styles.card} ${styles.content}`} key={uuid}>
       <h1>{name.charAt(0).toUpperCase() + name.slice(1)}</h1>
       <img src={image} alt={name} />
       <div>
