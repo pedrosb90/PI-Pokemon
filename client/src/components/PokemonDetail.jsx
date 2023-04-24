@@ -18,7 +18,7 @@ const PokemonDetail = () => {
       return <div>Loading...</div>;
     }
     const capiTitle =
-      pokeDetail.name.charAt(0).toUpperCase() + pokeDetail.name.slice(1);
+      pokeDetail.name.slice(0, 1).toUpperCase() + pokeDetail.name.slice(1);
 
     return (
       <div>
@@ -41,7 +41,8 @@ const PokemonDetail = () => {
             Types:{" "}
             {pokeDetail.types
               .map(
-                (type) => type.name.charAt(0).toUpperCase() + type.name.slice(1)
+                (type) =>
+                  type.name.slice(0, 1).toUpperCase() + type.name.slice(1)
               )
               .join(", ")}
           </p>

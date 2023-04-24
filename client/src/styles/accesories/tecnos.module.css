@@ -1,0 +1,22 @@
+.img-c {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+.containerT {
+  border-color: black solid 2rem;
+  width: 60px;
+  height: 60px;
+}
+footer {
+  border-color: black solid 2rem;
+  width: 60px;
+  height: 60px;
+}
+.image {
+  width: 60px;
+  height: 60px;
+}
+.container {
+  margin-top: -100px;
+}

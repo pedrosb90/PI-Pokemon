@@ -51,7 +51,9 @@ function SearchPokemon() {
         >
           <option value="">--Pokemon Name.. --</option>
           {menu.map((pokemon) => (
-            <option value={pokemon.pokeId}>{pokemon}</option>
+            <option key={pokemon.uuid} value={pokemon.pokeId}>
+              {pokemon}
+            </option>
           ))}
         </select>
       </div>

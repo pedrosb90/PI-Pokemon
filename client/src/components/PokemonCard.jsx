@@ -14,8 +14,8 @@ function PokemonCard({ pokeId, name, image, types, uuid }) {
       <img src={image} alt={name} />
       <div>
         <h2>Types: </h2>
-        {types.map(({ slot, name }) => (
-          <p key={slot}>{name.charAt(0).toUpperCase() + name.slice(1)}</p>
+        {types.map(({ typeId, name }) => (
+          <p key={typeId}>{name.charAt(0).toUpperCase() + name.slice(1)}</p>
         ))}
         <Link
           to={`/pokemons/${pokeId}`}

@@ -12,17 +12,30 @@ const DisplayPokemons = () => {
 
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(12);
-
-  const max = Math.ceil(pokemons.length / perPage);
+  const max = Math.ceil(
+    filteredPokemons.length > 0
+      ? filteredPokemons.length / perPage
+      : pokemons.length / perPage
+  );
+  const lastPageItems =
+    (filteredPokemons.length > 0 ? filteredPokemons.length : pokemons.length) %
+    perPage;
 
   useEffect(() => {
     dispatch(getAllPokemons());
   }, [dispatch]);
 
+  useEffect(() => {
+    setPage(1);
+  }, [filteredPokemons]);
+
   return (
     <div className={`${styles3.container}`}>
       {(filteredPokemons.length > 0 ? filteredPokemons : pokemons)
-        .slice((page - 1) * perPage, (page - 1) * perPage + perPage)
+        .slice(
+          (page - 1) * perPage,
+          page === max ? (page - 1) * perPage + lastPageItems : page * perPage
+        )
         .map(({ pokeId, name, image, types, uuid }) => (
           <PokemonCard
             key={uuid}
