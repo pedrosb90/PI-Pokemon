@@ -13,9 +13,7 @@ const DisplayPokemons = () => {
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(12);
 
-  const max = pokemons.length / perPage;
-
-  console.log(max);
+  const max = Math.ceil(pokemons.length / perPage);
 
   useEffect(() => {
     dispatch(getAllPokemons());

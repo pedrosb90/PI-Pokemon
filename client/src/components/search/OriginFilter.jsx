@@ -5,34 +5,40 @@ import styles from "../../styles/accesories/searchBar.module.css";
 
 function OriginFilter() {
   const dispatch = useDispatch();
-  const pokemons = useSelector((state) => state.pokemons);
-
   const [originFilter, setOriginFilter] = useState("");
+  const [isFiltered, setIsFiltered] = useState(false);
 
-  const handleFilterByOrigin = (origin) => {
-    if (origin === "") {
-      dispatch(filterPokemonsOrigin([]));
-      setOriginFilter("");
-      return;
-    }
-    setOriginFilter(origin);
-  };
   const handleFilterClick = () => {
-    dispatch(filterPokemonsOrigin(originFilter));
+    if (originFilter === "") {
+      dispatch(filterPokemonsOrigin([]));
+      setIsFiltered(true);
+    } else {
+      setIsFiltered(true);
+      dispatch(filterPokemonsOrigin(originFilter));
+    }
   };
+
+  const handleReset = () => {
+    setIsFiltered(false);
+    setOriginFilter("");
+    dispatch(filterPokemonsOrigin([]));
+  };
+
   return (
     <div>
       <div>
-        <button className={styles.button} onClick={handleFilterClick}>
-          {" "}
-          Filter
+        <button
+          className={styles.button}
+          onClick={isFiltered ? handleReset : handleFilterClick}
+        >
+          {isFiltered ? "Reset" : "Filter"}
         </button>
         <select
           className={styles.box}
-          onChange={(e) => handleFilterByOrigin(e.target.value)}
+          onChange={(e) => setOriginFilter(e.target.value)}
           value={originFilter}
         >
-          <option value="">--Select Origin--</option>
+          <option value="">-- Pokemon Origin --</option>
           <option value="api">API</option>
           <option value="created">New Creations</option>
         </select>{" "}

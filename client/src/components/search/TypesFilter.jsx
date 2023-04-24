@@ -8,6 +8,7 @@ function TypesFilter() {
   const [selectedType, setSelectedType] = useState("");
   const types = useSelector((state) => state.types);
   const [isLoading, setIsLoading] = useState(true);
+  const [isFiltered, setIsFiltered] = useState(false);
 
   useEffect(() => {
     async function fetchTypes() {
@@ -17,9 +18,15 @@ function TypesFilter() {
     fetchTypes();
   }, [dispatch]);
 
+  const handleReset = () => {
+    setSelectedType("");
+    setIsFiltered(false);
+    dispatch(filterByType(""));
+  };
   const handleFilterByType = () => {
     if (selectedType) {
       dispatch(filterByType(selectedType));
+      setIsFiltered(true);
     }
   };
 
@@ -29,8 +36,11 @@ function TypesFilter() {
 
   return (
     <div>
-      <button className={styles.button} onClick={handleFilterByType}>
-        Filter
+      <button
+        className={styles.button}
+        onClick={isFiltered ? handleReset : handleFilterByType}
+      >
+        {isFiltered ? "Reset" : "Filter"}
       </button>
       {isLoading ? (
         <p>Loading...</p>
@@ -40,7 +50,7 @@ function TypesFilter() {
           onChange={handleSelectType}
           value={selectedType}
         >
-          <option value="">--Select Pokemon Type--</option>
+          <option value="">-- Pokemon Type --</option>
           {types.map((type) => (
             <option key={type.typeId} value={type.name}>
               {type.name}
