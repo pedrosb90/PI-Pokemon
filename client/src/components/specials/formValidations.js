@@ -8,8 +8,39 @@ const validateNumInput = (value, name = "") => {
   if (value <= 0) {
     return `${name} has to be a positive number`;
   }
-  if (value > 999) {
-    return `${name} cannot be greater than a 3 digit number`;
+  if (value > 99999999) {
+    return `${name} cannot be greater than 100 thousand kilos`;
+  }
+  return null;
+};
+
+const validateWeiInput = (value, name = "") => {
+  if (isNaN(value) || !/^\d+$/.test(value)) {
+    return `Please enter a valid numerical ${name} value`;
+  }
+  if (!value) {
+    return `${name} is required`;
+  }
+  if (value <= 0) {
+    return `${name} has to be a positive number`;
+  }
+  if (value > 99999999) {
+    return `${name} cannot be greater than 100 thousand kilos`;
+  }
+  return null;
+};
+const validateHeightInput = (value, name = "") => {
+  if (isNaN(value) || !/^\d+$/.test(value)) {
+    return `Please enter a valid ${name} value in centimeters`;
+  }
+  if (!value) {
+    return `${name} is required`;
+  }
+  if (value <= 0) {
+    return `${name} has to be a positive number`;
+  }
+  if (value > 5000) {
+    return `${name} cannot be higher than 50 meters`;
   }
   return null;
 };
@@ -51,6 +82,8 @@ const validateType = (selectedTypes) => {
 };
 
 module.exports = {
+  validateWeiInput,
+  validateHeightInput,
   validateNumInput,
   validateTextInput,
   validateImageUrl,

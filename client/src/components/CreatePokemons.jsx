@@ -3,9 +3,11 @@ import { Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createPokemon } from "../actions";
 import {
-  validateNumInput,
+  validateHeightInput,
+  validateWeiInput,
   validateImageUrl,
   validateTextInput,
+  validateNumInput,
 } from "../components/specials/formValidations";
 import FormTypeSelect from "./specials/FormTypeSelect";
 import styles from "../styles/form.module.css";
@@ -170,32 +172,36 @@ function CreatePokemons() {
                 {validateNumInput(pokemon.speed, "Speed")}
               </label>
             )}
-            <label className={`${styles.labelTitle}`}>Height:</label>
+            <label className={`${styles.labelTitle}`}>
+              {"Height (in Centimeters)"}
+            </label>
             <input
               type="number"
               id="height"
               name="height"
               value={pokemon.height}
               onChange={handleChange}
-              className={validateNumInput(pokemon.height)}
+              className={validateHeightInput(pokemon.height)}
             />
-            {validateNumInput(pokemon.height) && (
+            {validateHeightInput(pokemon.height) && (
               <label className={styles.errorMessage}>
-                {validateNumInput(pokemon.height, "Height")}
+                {validateHeightInput(pokemon.height, "Height")}
               </label>
             )}
-            <label className={`${styles.labelTitle}`}>Weight:</label>
+            <label className={`${styles.labelTitle}`}>
+              {"Weight (in Grams) "}:
+            </label>
             <input
               type="number"
               id="weight"
               name="weight"
               value={pokemon.weight}
               onChange={handleChange}
-              className={validateNumInput(pokemon.weight)}
+              className={validateWeiInput(pokemon.weight)}
             />
-            {validateNumInput(pokemon.weight) && (
+            {validateWeiInput(pokemon.weight) && (
               <label className={styles.errorMessage}>
-                {validateNumInput(pokemon.weight, "Weight")}
+                {validateWeiInput(pokemon.weight, "Weight")}
               </label>
             )}
 
@@ -222,10 +228,11 @@ function CreatePokemons() {
                   pokemon.life,
                   pokemon.attack,
                   pokemon.speed,
-                  pokemon.height,
-                  pokemon.weight,
+
                   pokemon.defense
-                ) !== null
+                ) ||
+                validateHeightInput(pokemon.height) ||
+                validateWeiInput(pokemon.weight) !== null
                   ? styles.disabledButton
                   : styles.enabledButton
               }`}
@@ -244,10 +251,11 @@ function CreatePokemons() {
                   pokemon.life,
                   pokemon.attack,
                   pokemon.speed,
-                  pokemon.height,
-                  pokemon.weight,
+
                   pokemon.defense
-                ) !== null
+                ) ||
+                validateHeightInput(pokemon.height) ||
+                validateWeiInput(pokemon.weight) !== null
               }
             >
               Create Pokemon

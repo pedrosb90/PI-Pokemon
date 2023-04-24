@@ -35,8 +35,8 @@ const PokemonDetail = () => {
           <p>Attack: {pokeDetail.attack}</p>
           <p>Defense: {pokeDetail.defense}</p>
           <p>Speed: {pokeDetail.speed}</p>
-          <p>Height: {pokeDetail.height}</p>
-          <p>Weight: {pokeDetail.weight}</p>
+          <p>Height: {(pokeDetail.height * 0.1).toFixed(1)} Meters</p>
+          <p>Weight: {pokeDetail.weight / 10} Kg.</p>
           <p>
             Types:{" "}
             {pokeDetail.types
