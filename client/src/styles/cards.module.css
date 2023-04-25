@@ -24,6 +24,11 @@
   height: 180px;
   transition: transform 0.2s ease-out;
 }
+.img {
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+
 .card:hover {
   transform: translate(2px, -5px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);

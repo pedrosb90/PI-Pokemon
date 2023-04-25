@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getPokemonByName } from "../../actions";
 import styles from "../../styles/accesories/searchBar.module.css";
 import { Redirect } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 function SearchPokemon() {
   const [selectedPokemon, setSelectedPokemon] = useState("");
@@ -49,16 +50,19 @@ function SearchPokemon() {
           onChange={handleSelectPokemon}
           className={styles.box}
         >
-          <option value="">--Pokemon Name.. --</option>
-          {menu.map((pokemon) => (
-            <option key={pokemon.uuid} value={pokemon.pokeId}>
-              {pokemon}
-            </option>
-          ))}
+          <option key="option" value="">
+            --Pokemon Name.. --
+          </option>
+          {menu.map((pokemon) => {
+            return (
+              <option key={uuidv4()} value={pokemon.pokeId}>
+                {pokemon}
+              </option>
+            );
+          })}
         </select>
       </div>
     </div>
   );
 }
-
 export default SearchPokemon;

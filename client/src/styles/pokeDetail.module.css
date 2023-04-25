@@ -12,7 +12,12 @@
   align-items: center;
   margin-bottom: 90px;
 }
-
+.iD {
+  font-weight: bold;
+  background-color: #9a9a9a;
+  width: 41px;
+  border-radius: 10px;
+}
 .title {
   margin-bottom: 150px;
   font-weight: bold;
@@ -34,6 +39,7 @@
 }
 
 .image {
+  border-radius: 18px;
   margin-top: -132px;
   width: 100px;
   height: 100px;
@@ -69,4 +75,10 @@ ul {
 
 .select:hover {
   background-color: #f5f5f5;
+}
+.typesContainer {
+  background-color: #9a9a9a;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 40px;
 }

@@ -11,7 +11,7 @@ function PokemonCard({ pokeId, name, image, types, uuid }) {
   return (
     <div className={`${styles.card} ${styles.content}`} key={uuid}>
       <h1>{name.charAt(0).toUpperCase() + name.slice(1)}</h1>
-      <img src={image} alt={name} />
+      <img className={styles.img} src={image} alt={name} />
       <div>
         <h2>Types: </h2>
         {types.map(({ typeId, name }) => (

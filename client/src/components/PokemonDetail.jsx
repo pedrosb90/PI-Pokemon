@@ -11,40 +11,48 @@ const PokemonDetail = () => {
 
   useEffect(() => {
     dispatch(getPokemonById(pokeId));
-  }, [pokeId]);
+  }, [dispatch, pokeId]);
 
   try {
     if (!pokeDetail) {
       return <div>Loading...</div>;
     }
-    const capiTitle =
-      pokeDetail.name.slice(0, 1).toUpperCase() + pokeDetail.name.slice(1);
+    // const capiTitle =
+    //   pokeDetail &&
+    //   pokeDetail.name.slice(0, 1).toUpperCase() + pokeDetail.name.slice(1);
 
     return (
       <div>
         <h1 className={`${styles.titleMain}`}>Pokemon Detail</h1>{" "}
         <div className={`${styles.content} ${styles.container}`}>
-          <h2 className={` ${styles.title}`}>{capiTitle}</h2>
+          <h2
+            className={`${styles.title}`}
+            style={{ textTransform: "capitalize" }}
+          >
+            {pokeDetail?.name}
+          </h2>
           <img
             src={pokeDetail.image}
             alt={pokeDetail.name}
             className={styles.image}
           />
-          <p>ID: {pokeDetail.pokeId}</p>
+          <p className={styles.iD}>ID: {pokeDetail.pokeId}</p>
           <p>Life: {pokeDetail.life}</p>
           <p>Attack: {pokeDetail.attack}</p>
           <p>Defense: {pokeDetail.defense}</p>
           <p>Speed: {pokeDetail.speed}</p>
           <p>Height: {(pokeDetail.height * 0.1).toFixed(1)} Meters</p>
           <p>Weight: {pokeDetail.weight / 10} Kg.</p>
-          <p>
+          <p className={styles.typesContainer}>
             Types:{" "}
-            {pokeDetail.types
-              .map(
-                (type) =>
-                  type.name.slice(0, 1).toUpperCase() + type.name.slice(1)
-              )
-              .join(", ")}
+            {pokeDetail && pokeDetail.types && pokeDetail.types.length > 0
+              ? pokeDetail.types
+                  .map(
+                    (type) =>
+                      type.name.slice(0, 1).toUpperCase() + type.name.slice(1)
+                  )
+                  .join(", ")
+              : "N/A"}
           </p>
         </div>
       </div>

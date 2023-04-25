@@ -6,11 +6,11 @@ import LandingTecnos from "../components/specials/LandingTecnos";
 
 const Landing = () => {
   return (
-    <div lassName={`${styles.container}`}>
+    <div className={`${styles.container}`}>
       <br />
       <h1 className={`${styles.title}`}>Welcome to Henry Pokemons App!</h1>
       <div>
-        <img src={image} className={`${styles1.img}`} />
+        <img src={image} className={`${styles1.img}`} alt="decoimg" />
       </div>
       <LandingTecnos />
     </div>
