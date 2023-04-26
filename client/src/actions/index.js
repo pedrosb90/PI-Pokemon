@@ -11,14 +11,19 @@ export const FILTER_POKEMONS_ORIGIN = "FILTER_POKEMONS_ORIGIN";
 export const FILTER_BY_TYPE = "FILTER_BY_TYPE";
 export const SORT_POKEMONS_AZ = "SORT_POKEMONS_AZ";
 export const SORT_POKEMONS_BY_ATTACK = "SORT_POKEMONS_BY_ATTACK";
+export const FETCH_ALL_POKEMONS_FAILURE = "FETCH_ALL_POKEMONS_FAILURE";
+export const FETCH_POKEMON_ID_FAILURE = "FETCH_POKEMON_ID_FAILURE";
+export const CREATE_POKEMON_FAILURE = "CREATE_POKEMON_FAILURE";
 
 export const getAllPokemons = () => {
   return async function (dispatch) {
     try {
-      console.log("Fetching all pokemons...");
-      const pokemons = await axios.get(`/pokemons`);
-      console.log("Fetched all pokemons:", pokemons.data);
-      const updatedPokemons = pokemons.data.map((pokemon) => ({
+      const response = await axios.get(`/pokemons`);
+      if (response.status !== 200 || !response.data.length) {
+        throw new Error("Pokemons not found.");
+      }
+
+      const updatedPokemons = response.data.map((pokemon) => ({
         ...pokemon,
         origin: "api",
       }));
@@ -27,25 +32,36 @@ export const getAllPokemons = () => {
         payload: updatedPokemons,
       });
     } catch (error) {
-      console.log(error.message);
+      dispatch({
+        type: FETCH_ALL_POKEMONS_FAILURE,
+        payload: error.message,
+      });
     }
   };
 };
 export const getPokemonById = (pokeId) => {
   return async function (dispatch) {
     try {
-      console.log(`Fetching pokemon with ID ${pokeId}...`);
+      if (!/^[1-9]\d*$/.test(pokeId)) {
+        throw new Error("Invalid ID format..");
+      }
       const pokemon = await axios.get(`/pokemons/${pokeId}`);
-      console.log(`Fetched pokemon with ID ${pokeId}:`, pokemon.data);
+      if (!pokemon.data) {
+        throw new Error(`Pokemon with ID ${pokeId} does not exist`);
+      }
       dispatch({
         type: GET_POKEMON_BY_ID,
         payload: pokemon.data,
       });
     } catch (error) {
-      console.log(error.message);
+      dispatch({
+        type: FETCH_POKEMON_ID_FAILURE,
+        payload: error.message,
+      });
     }
   };
 };
+
 export const getPokemonByName = (name) => {
   return async function (dispatch) {
     try {
@@ -87,11 +103,7 @@ export const getTypes = () => {
 };
 export const createPokemon = (pokemon) => {
   return async (dispatch) => {
-    console.log("Pokemon before POST request:", pokemon);
-
-    if (!pokemon.origin) {
-      pokemon.origin = "created";
-    }
+    console.log("Pokemon before POST:", pokemon);
 
     try {
       const response = await axios.post("/pokemons", pokemon);
@@ -99,9 +111,13 @@ export const createPokemon = (pokemon) => {
         type: CREATE_POKEMON,
         payload: response.data,
       });
-      console.log("Pokemon created successfully!");
+      console.log("Pokemon created OK");
     } catch (error) {
-      console.error("Error posting pokemon: ", error);
+      dispatch({
+        type: CREATE_POKEMON_FAILURE,
+        payload:
+          "Not possible to create a Pokemon right now.. Please try again later.",
+      });
     }
   };
 };

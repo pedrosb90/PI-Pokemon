@@ -45,10 +45,11 @@ const FormTypeSelect = ({ setPokemon, setCanSubmit }) => {
       <input
         type="drop"
         placeholder="Select at least one type.."
-        value={selectedTypes
+        defaultValue={selectedTypes
           .map((t) => t.name.charAt(0).toUpperCase() + t.name.slice(1))
           .join(", ")}
         onClick={toggleDropdown}
+        onChange={() => {}}
       />
       {validateType(selectedTypes) && (
         <label className={styles.errorMessage}>

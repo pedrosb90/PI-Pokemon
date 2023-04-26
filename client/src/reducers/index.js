@@ -11,6 +11,9 @@ import {
   FILTER_BY_TYPE,
   SORT_POKEMONS_AZ,
   SORT_POKEMONS_BY_ATTACK,
+  FETCH_ALL_POKEMONS_FAILURE,
+  FETCH_POKEMON_ID_FAILURE,
+  CREATE_POKEMON_FAILURE,
 } from "../actions/index.js";
 
 const initialState = {
@@ -20,6 +23,7 @@ const initialState = {
   newPokemon: {},
   pokemonFound: {},
   filtered: [],
+  error: "",
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -142,7 +146,21 @@ const rootReducer = (state = initialState, action) => {
         filtered: sortedFiltered2,
         sortOrder: action.payload,
       };
-
+    case FETCH_ALL_POKEMONS_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+      };
+    case FETCH_POKEMON_ID_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+      };
+    case CREATE_POKEMON_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+      };
     default:
       return state;
   }

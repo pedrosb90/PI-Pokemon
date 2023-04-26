@@ -52,8 +52,8 @@ const validateTextInput = (value, name) => {
   if (/[^a-zA-Z]/.test(value)) {
     return `${name} must be composed of letters only!`;
   }
-  if (value.length > 20) {
-    return `${name} cannot be longer than 20 characters`;
+  if (value.length < 3 || value.length > 20) {
+    return `${name} is required to have 3 to 20 characters`;
   }
 
   if (!isNaN(value)) {

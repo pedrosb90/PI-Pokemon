@@ -3,15 +3,20 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllPokemons } from "../actions/index";
 import PokemonCard from "./PokemonCard";
 import styles3 from "../styles/cards.module.css";
+import errorMess from "../styles/accesories/error.module.css";
 import Pagination from "./specials/Pagination";
+import loader from "../styles/loader.module.css";
 
 const DisplayPokemons = () => {
   const dispatch = useDispatch();
   const pokemons = useSelector((state) => state.pokemons);
   const filteredPokemons = useSelector((state) => state.filtered);
+  const error = useSelector((state) => state.error);
 
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(12);
+  const [isLoading, setIsLoading] = useState(true);
+
   const max = Math.ceil(
     filteredPokemons.length > 0
       ? filteredPokemons.length / perPage
@@ -22,15 +27,30 @@ const DisplayPokemons = () => {
     perPage;
 
   useEffect(() => {
-    dispatch(getAllPokemons());
+    setIsLoading(true);
+
+    try {
+      dispatch(getAllPokemons()).then(setIsLoading(false));
+    } catch (error) {
+      setIsLoading(false);
+    }
   }, [dispatch]);
 
   useEffect(() => {
     setPage(1);
   }, [filteredPokemons]);
 
+  if (isLoading) {
+    return <h2 className={loader.loading}>Loading...</h2>;
+  }
+
   return (
     <div className={`${styles3.container}`}>
+      {error && (
+        <div className="error">
+          <p className={errorMess.message}>{error}</p>
+        </div>
+      )}
       {(filteredPokemons.length > 0 ? filteredPokemons : pokemons)
         .slice(
           (page - 1) * perPage,

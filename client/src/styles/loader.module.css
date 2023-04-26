@@ -1,0 +1,22 @@
+.loading {
+  font-size: 32px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  animation: blinkZoom 1s ease-in-out infinite;
+}
+
+@keyframes blinkZoom {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

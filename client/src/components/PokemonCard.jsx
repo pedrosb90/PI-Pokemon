@@ -19,7 +19,9 @@ function PokemonCard({ pokeId, name, image, types, uuid }) {
         ))}
         <Link
           to={`/pokemons/${pokeId}`}
-          onClick={() => dispatch(getPokemonById(pokeId))}
+          onClick={() => {
+            dispatch(getPokemonById(pokeId));
+          }}
         >
           <DetailLink />
         </Link>

@@ -1,7 +1,14 @@
 .img {
   display: block;
   margin: 0 auto;
-  max-width: 75%;
-  max-height: 80%;
+  max-width: 65%;
+  max-height: 70%;
   height: auto;
+}
+.title {
+  font-size: larger;
+  margin-top: -20px;
+  margin-bottom: -5px;
+  font-weight: 800;
+  text-shadow: 6px 6px 6px rgb(1, 1, 1);
 }

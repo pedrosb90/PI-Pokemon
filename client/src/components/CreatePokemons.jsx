@@ -66,7 +66,7 @@ function CreatePokemons() {
         typeIds: [],
       });
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
     }
   };
 
