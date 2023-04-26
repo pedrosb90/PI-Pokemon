@@ -5,10 +5,14 @@ const types = express.Router();
 
 types.get("/", async (req, res) => {
   try {
-    // const allTypes = await getAllTypes();
-    // res.status(200).json(allTypes);
-    const dbTypes = await getDBTypes();
-    res.status(200).json(dbTypes);
+    const types = await getDBTypes();
+
+    if (types.length > 0) {
+      res.json(types);
+    } else {
+      const apiTypes = await getAllTypes();
+      res.status(200).json(apiTypes);
+    }
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to get pokemon types" });

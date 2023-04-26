@@ -1,5 +1,4 @@
 const { DataTypes, Sequelize } = require("sequelize");
-const { v4: uuidv4 } = require("uuid");
 
 module.exports = (sequelize) => {
   const Pokemon = sequelize.define(
@@ -7,7 +6,6 @@ module.exports = (sequelize) => {
     {
       pokeId: {
         type: DataTypes.INTEGER,
-        unique: true,
         primaryKey: true,
       },
       uuid: {
@@ -17,10 +15,18 @@ module.exports = (sequelize) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          len: {
+            args: [3, 20],
+          },
+        },
       },
       image: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          isUrl: true,
+        },
       },
       life: {
         type: DataTypes.INTEGER,

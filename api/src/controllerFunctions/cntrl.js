@@ -141,6 +141,8 @@ const createPokemon = async (
       speed,
       height,
       weight,
+      typeIds,
+      origin: "created",
     });
     const types = await db.Type.findAll({
       where: {

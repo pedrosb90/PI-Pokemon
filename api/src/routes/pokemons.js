@@ -10,19 +10,17 @@ const { Pokemon, Type } = require("../db");
 const pokemons = express.Router();
 
 pokemons.get("/", async (req, res) => {
-  // try {
-  //   const allPokemons = await getAllPokemons();
-  //   console.log(allPokemons);
-  //   res.status(200).json(allPokemons);
-  // } catch (error) {
-  //   console.error(error);
-  //   res.status(500).json({ message: "Internal Server Error" });
-  // }
   try {
     const pokemons = await Pokemon.findAll({
       include: [{ model: Type, as: "types" }],
     });
-    res.json(pokemons);
+
+    if (pokemons.length > 0) {
+      res.json(pokemons);
+    } else {
+      const allPokemons = await getAllPokemons();
+      res.status(200).json(allPokemons);
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Unable to fetch pokemons" });
@@ -34,7 +32,7 @@ pokemons.get("/:id", async (req, res) => {
 
   if (isNaN(id)) {
     res.status(400).json({
-      error: "Incorrect Id. Try again with a number from 1 to 100",
+      error: "Invalid Id",
     });
     return;
   }
@@ -71,7 +69,8 @@ pokemons.post("/", async (req, res) => {
       speed,
       height,
       weight,
-      typeIds
+      typeIds,
+      "created"
     );
     res.status(201).json(pokemon);
   } catch (error) {
