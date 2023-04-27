@@ -28,7 +28,6 @@ const DisplayPokemons = () => {
 
   useEffect(() => {
     setIsLoading(true);
-
     try {
       dispatch(getAllPokemons()).then(setIsLoading(false));
     } catch (error) {
@@ -66,19 +65,20 @@ const DisplayPokemons = () => {
           />
         ))}
       <br />
-
-      <Pagination
-        page={page}
-        setPage={setPage}
-        max={max}
-        style={{
-          position: "absolute",
-          bottom: 0,
-          width: "100%",
-          padding: "10px",
-          backgroundColor: "#fff",
-        }}
-      />
+      <div className={styles3.pagination}>
+        <Pagination
+          page={page}
+          setPage={setPage}
+          max={max}
+          style={{
+            position: "absolute",
+            bottom: 0,
+            width: "100%",
+            padding: "10px",
+            backgroundColor: "#fff",
+          }}
+        />
+      </div>
     </div>
   );
 };
