@@ -5,11 +5,23 @@ import DisplayPokemons from "./DisplayPokemons";
 import styles from "../styles/home.module.css";
 import SearchBar from "./search/SearchBar";
 import CreateButton from "./buttons/CreateButton";
+import backgroundImage from "../img/40129.jpeg";
+
 import titleImg from "/Users/pedro/Desktop/Henry/P INDIVIDUALES/PI-Pokemon-main/client/src/pokeLogo.png";
 
 const Home = () => {
   return (
-    <div>
+    <div
+      className="App"
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        height: "100%",
+        width: "100%",
+        zoom: "0.9",
+      }}
+    >
       <img src={titleImg} alt="titleImage" className={styles.img}></img>
       <Link to="/types">
         <TypesButton />
