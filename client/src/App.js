@@ -7,12 +7,23 @@ import PokemonDetail from "./components/PokemonDetail";
 import CreatePokemons from "./components/CreatePokemons";
 import HomeButton from "./components/buttons/HomeButton";
 import SuccessPage from "./components/specials/SuccessFormPage";
+import backgroundImage from "./img/40129.jpeg";
 import axios from "axios";
 axios.defaults.baseURL = "http://localhost:3001/";
 
 function App() {
   return (
-    <div>
+    <div
+      className="App"
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        height: "100%",
+        width: "100%",
+        zoom: "0.9",
+      }}
+    >
       <Link to="/home">
         <HomeButton>Home</HomeButton>
       </Link>
