@@ -4,7 +4,6 @@ import { getTypes } from "../actions";
 import styles from "../styles/bodyText.module.css";
 import styles1 from "../styles/cardDisplay.module.css";
 import styles3 from "../styles/infoText.module.css";
-import bgStyle from "../styles/bg.module.css";
 
 const Types = () => {
   const dispatch = useDispatch();
@@ -17,7 +16,7 @@ const Types = () => {
 
   console.log(typeInfo);
   return (
-    <div className={bgStyle.bg}>
+    <div>
       <h1 className={`${styles.title}`}>Pokemon Types</h1>
       <ul className={`${styles1.typeContainer} `}>
         {typeInfo.map((type, index) => (

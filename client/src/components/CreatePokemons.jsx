@@ -11,7 +11,6 @@ import {
 } from "../components/specials/formValidations";
 import FormTypeSelect from "./specials/FormTypeSelect";
 import styles from "../styles/form.module.css";
-import bgStyle from "../styles/bg.module.css";
 
 function CreatePokemons() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -72,7 +71,7 @@ function CreatePokemons() {
   };
 
   return (
-    <div className={bgStyle.bg}>
+    <div>
       {isSubmitted ? (
         <div>
           <Redirect to="/success-page" />

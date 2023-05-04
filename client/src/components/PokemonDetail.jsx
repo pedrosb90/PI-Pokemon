@@ -2,8 +2,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { getPokemonById } from "../actions/index";
 import styles from "../styles/pokeDetail.module.css";
-import bgStyle from "../styles/bg.module.css";
-
 import errorMess from "../styles/accesories/error.module.css";
 import loader from "../styles/loader.module.css";
 import { useParams } from "react-router-dom";
@@ -27,7 +25,7 @@ const PokemonDetail = () => {
   }
 
   return (
-    <div className={bgStyle.bg}>
+    <div>
       <h1 className={`${styles.titleMain}`}>Pokemon Detail</h1>{" "}
       <div className={`${styles.content} ${styles.container}`}>
         <h2
