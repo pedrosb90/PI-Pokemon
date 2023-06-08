@@ -20,6 +20,7 @@ const Pagination = ({ page, setPage, max }) => {
         value={page}
         onChange={(event) => setPage(parseInt(event.target.value))}
       />
+      <br />
       <p className={`${styles.pageNumber} ${styles1.content}`}>
         of {Math.floor(max)}
       </p>
