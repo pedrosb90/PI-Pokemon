@@ -6,7 +6,7 @@
   justify-content: space-between;
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.487);
-  width: 90%;
+  width: 75%;
   max-height: 50%;
   margin: 0 auto;
   place-items: center;
@@ -63,7 +63,7 @@ button[type="sort"] {
   background-color: rgb(142, 9, 78);
   color: white;
   width: 115px;
-  height: 53px;
+  height: 58px;
   margin-bottom: -32px;
 }
 
