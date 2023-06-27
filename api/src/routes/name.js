@@ -3,6 +3,8 @@ const { getPokemonByName } = require("../controllerFunctions/cntrl");
 
 const pokemons = express.Router();
 
+//routing
+
 pokemons.get("/", async (req, res) => {
   try {
     const { name } = req.query;
